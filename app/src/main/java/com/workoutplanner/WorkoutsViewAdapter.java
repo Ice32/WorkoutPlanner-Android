@@ -36,8 +36,10 @@ public class WorkoutsViewAdapter extends RecyclerView.Adapter<WorkoutsViewAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(String.valueOf(mValues.get(position).id));
         holder.mNameView.setText(mValues.get(position).name);
+        holder.mExericesCountView.setText(
+                "Exercises: " + String.valueOf(mValues.get(position).exercises.size())
+        );
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,15 +60,15 @@ public class WorkoutsViewAdapter extends RecyclerView.Adapter<WorkoutsViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
         public final TextView mNameView;
+        public final TextView mExericesCountView;
         public Workout mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mNameView = (TextView) view.findViewById(R.id.name);
+            mNameView = view.findViewById(R.id.name);
+            mExericesCountView = view.findViewById(R.id.exercises_count);
         }
 
         @Override

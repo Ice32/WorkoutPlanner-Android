@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface WorkoutsAPI {
     public List<Workout> getCreatedWorkouts();
+    public void addWorkout(Workout workout);
 }

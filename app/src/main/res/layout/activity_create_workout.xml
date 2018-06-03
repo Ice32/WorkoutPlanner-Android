@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateWorkoutActivity">
+
+    <TextView
+        android:id="@+id/createWorkoutHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_create_workout_header"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/top_level_side_padding"
+        android:layout_alignParentTop="true"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/txtWorkoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createWorkoutHeader"
+        android:hint="@string/txt_workout_name"
+        android:maxLines="1"
+        android:layout_marginLeft="@dimen/top_level_side_padding"
+        android:layout_marginRight="@dimen/top_level_side_padding"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/exercisesSubHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_exercises_sub_header"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/txtWorkoutName"
+        android:textSize="17sp"/>
+
+    <LinearLayout
+        android:id="@+id/exercise1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/exercisesSubHeader"
+        android:paddingBottom="10dp"
+        android:paddingLeft="@dimen/top_level_side_padding"
+        android:paddingRight="@dimen/top_level_side_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lower back stretch" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 sets, 5 reps"
+            android:layout_marginRight="@dimen/top_level_side_padding"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/exercise2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/exercise1"
+        android:paddingBottom="10dp"
+        android:paddingLeft="@dimen/top_level_side_padding"
+        android:paddingRight="@dimen/top_level_side_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Psoas stretch" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 reps, 60 seconds each"
+            android:layout_marginRight="@dimen/top_level_side_padding"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_add_exercise"
+        android:theme="@style/SecondaryFlatButton"
+        android:layout_below="@id/exercise2"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btnCreateWorkoutSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_save"
+        android:theme="@style/PrimaryButton"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
