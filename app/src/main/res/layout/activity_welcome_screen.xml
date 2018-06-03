@@ -14,7 +14,7 @@
         android:layout_marginBottom="30dp">
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/bntOpenLogin"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -23,11 +23,12 @@
             android:theme="@style/PrimaryButton"/>
 
         <Button
+            android:id="@+id/bntOpenRegistration"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_toRightOf="@+id/btnLogin"
+            android:layout_toRightOf="@+id/bntOpenLogin"
             android:theme="@style/PrimaryButton"
             android:text="Register"
             android:layout_marginLeft="15dp"/>
