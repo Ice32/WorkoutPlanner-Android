@@ -11,7 +11,7 @@ import android.widget.Button;
 public class WelcomeScreenActivity extends Activity {
 
     Button btnOpenLogin;
-    Button btnRegistrationLogin;
+    Button btnOpenRegistration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +26,21 @@ public class WelcomeScreenActivity extends Activity {
         setContentView(R.layout.activity_welcome_screen);
 
         btnOpenLogin = findViewById(R.id.bntOpenLogin);
+        btnOpenRegistration = findViewById(R.id.btnOpenRegistration);
+
+
         btnOpenLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnOpenRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivity(intent);
             }
         });

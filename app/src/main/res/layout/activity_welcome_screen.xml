@@ -23,7 +23,7 @@
             android:theme="@style/PrimaryButton"/>
 
         <Button
-            android:id="@+id/bntOpenRegistration"
+            android:id="@+id/btnOpenRegistration"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

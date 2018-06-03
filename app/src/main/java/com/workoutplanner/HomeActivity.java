@@ -93,6 +93,9 @@ public class HomeActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_schedule) {
 
+        } else if (id == R.id.nav_mark_as_completed) {
+            Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
