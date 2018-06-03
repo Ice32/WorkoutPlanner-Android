@@ -12,6 +12,14 @@
             android:id="@+id/nav_schedule"
             android:icon="@drawable/calendar"
             android:title="Schedule workout" />
+        <item
+            android:id="@+id/nav_mark_as_completed"
+            android:icon="@drawable/task_complete"
+            android:title="Mark workout as completed" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/history"
+            android:title="My history" />
     </group>
 
 </menu>

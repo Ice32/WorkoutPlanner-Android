@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -108,5 +108,11 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onListFragmentInteraction(ScheduledWorkout item) {
         Logger.getAnonymousLogger().info("Clicked");
+    }
+
+    @Override
+    public void onButtonClick(ScheduledWorkout item) {
+        Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
+        startActivity(intent);
     }
 }

@@ -4,11 +4,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.workoutplanner.ScheduledWorkoutsListFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.ScheduledWorkout;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -20,6 +23,7 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
 
     private final List<ScheduledWorkout> mValues;
     private final OnListFragmentInteractionListener mListener;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM HH:mm");
 
     public ScheduledWorkoutsViewAdapter(List<ScheduledWorkout> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -37,9 +41,16 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).workout.name);
-        holder.mExericesCountView.setText(
-                "Exercises: " + String.valueOf(mValues.get(position).workout.exercises.size())
+        holder.mScheduledDateView.setText(
+                simpleDateFormat.format(mValues.get(position).time)
         );
+        Button btnOpenCompleteWorkout = holder.mView.findViewById(R.id.btnOpenCompleteWorkout);
+        btnOpenCompleteWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onButtonClick(holder.mItem);
+            }
+        });
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,14 +72,14 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
-        public final TextView mExericesCountView;
+        public final TextView mScheduledDateView;
         public ScheduledWorkout mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = view.findViewById(R.id.name);
-            mExericesCountView = view.findViewById(R.id.exercises_count);
+            mScheduledDateView = view.findViewById(R.id.scheduled_date);
         }
 
         @Override

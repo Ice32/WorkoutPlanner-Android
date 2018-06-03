@@ -5,6 +5,7 @@ import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.ScheduledWorkout;
 import com.workoutplanner.model.Workout;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,8 +22,12 @@ public class MockWorkoutsAPI implements WorkoutsAPI {
         workouts.add(new Workout("Morning yoga", exercises));
         workouts.add(new Workout("Back stretches", exercises));
 
-        scheduledWorkouts.add(new ScheduledWorkout(workouts.get(0)));
-        scheduledWorkouts.add(new ScheduledWorkout(workouts.get(1)));
+        scheduledWorkouts.add(
+            new ScheduledWorkout(workouts.get(0),new Date(2018, 11, 11, 13, 0))
+        );
+        scheduledWorkouts.add(
+            new ScheduledWorkout(workouts.get(1),new Date(2018, 11, 11, 17, 30))
+        );
     }
 
     @Override

@@ -96,5 +96,6 @@ public class ScheduledWorkoutsListFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(ScheduledWorkout item);
+        void onButtonClick(ScheduledWorkout item);
     }
 }
