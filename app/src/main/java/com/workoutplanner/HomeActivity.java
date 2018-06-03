@@ -13,12 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.workoutplanner.model.ScheduledWorkout;
 import com.workoutplanner.model.Workout;
 
 import java.util.logging.Logger;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, WorkoutsListFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener, WorkoutsListFragment.OnListFragmentInteractionListener,
+        ScheduledWorkoutsListFragment.OnListFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,11 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentInteraction(Workout item) {
+        Logger.getAnonymousLogger().info("Clicked");
+    }
+
+    @Override
+    public void onListFragmentInteraction(ScheduledWorkout item) {
         Logger.getAnonymousLogger().info("Clicked");
     }
 }

@@ -27,4 +27,6 @@
     <string name="btn_save">Save workout</string>
     <string name="txt_exercises_sub_header">Exercises</string>
     <string name="btn_add_exercise">Add exercise</string>
+    <string name="create_new_exercise_header">Create new exercise</string>
+    <string name="select_existing_exercise_header">OR select existing exercise</string>
 </resources>

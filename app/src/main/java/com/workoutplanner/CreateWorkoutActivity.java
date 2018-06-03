@@ -1,5 +1,6 @@
 package com.workoutplanner;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
     EditText txtWorkoutName;
     Button btnSaveWorkout;
+    Button btnAddExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,20 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
         btnSaveWorkout = findViewById(R.id.btnCreateWorkoutSave);
         txtWorkoutName = findViewById(R.id.txtWorkoutName);
+        btnAddExercise = findViewById(R.id.btnAddExercise);
 
         btnSaveWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveWorkout();
+            }
+        });
+
+        btnAddExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddExerciseActivity.class);
+                startActivity(intent);
             }
         });
     }
