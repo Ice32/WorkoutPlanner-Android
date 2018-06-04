@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WorkoutHistoryActivity">
+
+    <TextView
+        android:id="@+id/workoutHistoryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done workouts"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/top_level_side_padding"
+        android:textSize="@dimen/header_size"
+        android:textStyle="bold"
+    />
+    <TextView
+        android:id="@+id/workoutHistorySummaryHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutHistoryHeader"
+        android:layout_marginTop="@dimen/top_level_side_padding"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/workoutSummaryLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutHistorySummaryHeader"
+        android:layout_marginTop="8dp"
+        android:textSize="15sp"
+        android:text="You have done 5 workouts last week!" />
+    <TextView
+        android:id="@+id/workoutSummaryLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/workoutSummaryLine1"
+        android:layout_marginTop="7dp"
+        android:textSize="15sp"
+        android:text="You have completed 93% of scheduled workouts!" />
+
+    <fragment
+        android:id="@+id/doneWorkoutsFragment"
+        android:layout_marginTop="30dp"
+        android:name="com.workoutplanner.history.DoneWorkoutsListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/workoutSummaryLine2"/>
+
+</android.support.constraint.ConstraintLayout>

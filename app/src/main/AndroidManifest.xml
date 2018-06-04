@@ -40,7 +40,8 @@
         <activity android:name=".AddExerciseActivity" />
         <activity android:name=".CompleteWorkoutActivity" />
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".ScheduleWorkoutActivity"></activity>
+        <activity android:name=".ScheduleWorkoutActivity" />
+        <activity android:name=".WorkoutHistoryActivity"></activity>
     </application>
 
 </manifest>

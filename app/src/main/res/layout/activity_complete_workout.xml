@@ -14,6 +14,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/complete_workou_header"
         android:textSize="@dimen/header_size"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
         app:layout_constraintTop_toTopOf="parent"
         android:textAlignment="center"
