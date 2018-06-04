@@ -1,5 +1,6 @@
 package com.workoutplanner;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,5 +10,8 @@ public class CompleteWorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_workout);
+
+        final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
+        workoutNameWrapper.setHint("Name");
     }
 }

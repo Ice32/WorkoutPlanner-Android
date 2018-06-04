@@ -118,4 +118,10 @@ public class HomeActivity extends AppCompatActivity
         Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onScheduleButtonClick(Workout item) {
+        Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
+        startActivity(intent);
+    }
 }

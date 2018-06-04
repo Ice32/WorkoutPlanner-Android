@@ -29,17 +29,18 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
         <activity android:name=".CreateWorkoutActivity" />
         <activity android:name=".AddExerciseActivity" />
         <activity android:name=".CompleteWorkoutActivity" />
-        <activity android:name=".RegistrationActivity"></activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".ScheduleWorkoutActivity"></activity>
     </application>
 
 </manifest>
