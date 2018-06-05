@@ -19,7 +19,7 @@ import com.workoutplanner.model.Workout;
 import java.util.logging.Logger;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, WorkoutsListFragment.OnListFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener,
         ScheduledWorkoutsListFragment.OnListFragmentInteractionListener {
 
     @Override
@@ -97,6 +97,8 @@ public class HomeActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
         } else if (id == R.id.nav_history) {
             intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+        } else if (id == R.id.created_activities) {
+            intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         }
         startActivity(intent);
 
@@ -105,10 +107,6 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onListFragmentInteraction(Workout item) {
-        Logger.getAnonymousLogger().info("Clicked");
-    }
 
     @Override
     public void onListFragmentInteraction(ScheduledWorkout item) {
@@ -121,9 +119,4 @@ public class HomeActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    @Override
-    public void onScheduleButtonClick(Workout item) {
-        Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
-        startActivity(intent);
-    }
 }
