@@ -19,7 +19,6 @@ import java.util.List;
 public class CreateWorkoutActivity extends AppCompatActivity {
 
     private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
-    private List<Exercise> exercises = new ArrayList<>();
 
     EditText txtWorkoutName;
     Button btnSaveWorkout;
@@ -44,7 +43,7 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddExerciseActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AddExistingExerciseActivity.class);
                 startActivity(intent);
             }
         });
