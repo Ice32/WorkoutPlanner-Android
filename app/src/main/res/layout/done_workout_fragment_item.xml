@@ -1,39 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scheduledWorkoutsFragmentItem"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/material_list_three_lines_height"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+    android:paddingRight="@dimen/material_list_two_lines_side_padding">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/doneWorkoutsOverline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/text_margin"
-        android:layout_marginRight="@dimen/text_margin"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
+        android:fontFamily="@font/roboto_regular"
+        android:layout_marginTop="18dp"
+        android:textSize="@dimen/materialListOverlineSize"
+        android:text="Lorem ipsum"
+        android:textColor="@color/material_list_header_light"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <TextView
-        android:id="@+id/scheduled_date"
+        android:id="@+id/doneWorkoutsHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/text_margin"
-        android:layout_marginRight="@dimen/text_margin"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="@dimen/materialListHeaderSize"
+        app:layout_constraintTop_toBottomOf="@+id/doneWorkoutsOverline"
+        android:text="Lorem ipsum header"
+        android:textColor="@color/material_list_header_dark"
+        android:layout_marginTop="4dp"/>
     <TextView
-        android:id="@+id/doneWorkoutRating"
+        android:id="@+id/doneWorkoutsSubHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:text="Your rating: 4"/>
-</LinearLayout>
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintTop_toBottomOf="@+id/doneWorkoutsHeader"
+        android:layout_marginTop="10dp"
+        android:text="Your rating: 4.5 stars."
+        android:textSize="@dimen/materialListSubHeaderSize"
+        android:textColor="@color/material_list_header_light"
+        />
+
+</android.support.constraint.ConstraintLayout>

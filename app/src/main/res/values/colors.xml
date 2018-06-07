@@ -13,4 +13,11 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+
+    <color name="material_list_header_light">
+        #666666
+    </color>
+    <color name="material_list_header_dark">
+        #212121
+    </color>
 </resources>

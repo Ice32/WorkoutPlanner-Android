@@ -38,7 +38,7 @@
         <activity android:name=".CompleteWorkoutActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".ScheduleWorkoutActivity" />
-        <activity android:name=".WorkoutHistoryActivity" />
+        <activity android:name=".WorkoutHistoryActivity" android:label="Done workouts" />
         <activity android:name=".CreatedWorkoutsActivity" />
         <activity android:name=".AddExistingExerciseActivity" />
         <activity android:name=".SetsAndRepsSelectorActivity"></activity>

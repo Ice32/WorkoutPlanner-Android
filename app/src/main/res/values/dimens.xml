@@ -13,4 +13,6 @@
     <dimen name="material_list_two_lines_side_padding">16dp</dimen>
     <dimen name="materialListHeaderSize">16dp</dimen>
     <dimen name="materialListSubHeaderSize">14dp</dimen>
+    <dimen name="material_list_three_lines_height">88dp</dimen>
+    <dimen name="materialListOverlineSize">10dp</dimen>
 </resources>

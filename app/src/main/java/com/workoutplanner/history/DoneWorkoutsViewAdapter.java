@@ -65,13 +65,15 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
         public final View mView;
         public final TextView mNameView;
         public final TextView mScheduledDateView;
+        public final TextView mRatingView;
         public ScheduledWorkout mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mNameView = view.findViewById(R.id.name);
-            mScheduledDateView = view.findViewById(R.id.scheduled_date);
+            mNameView = view.findViewById(R.id.doneWorkoutsHeader);
+            mScheduledDateView = view.findViewById(R.id.doneWorkoutsOverline);
+            mRatingView = view.findViewById(R.id.doneWorkoutsSubHeader);
         }
 
         @Override

@@ -21,12 +21,16 @@ public class MockWorkoutsAPI implements WorkoutsAPI {
 
         workouts.add(new Workout("Morning yoga", exercises));
         workouts.add(new Workout("Back stretches", exercises));
+        workouts.add(new Workout("Upper back and neck, short version", exercises));
 
         scheduledWorkouts.add(
-            new ScheduledWorkout(workouts.get(0),new Date(2018, 11, 11, 13, 0))
+            new ScheduledWorkout(workouts.get(0),new Date(2018, 11, 15, 13, 0))
         );
         scheduledWorkouts.add(
-            new ScheduledWorkout(workouts.get(1),new Date(2018, 11, 11, 17, 30))
+            new ScheduledWorkout(workouts.get(1),new Date(2018, 11, 13, 17, 30))
+        );
+        scheduledWorkouts.add(
+                new ScheduledWorkout(workouts.get(2),new Date(2018, 11, 5, 17, 30))
         );
     }
 
