@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--<item-->
+        <!--android:id="@+id/cancelCreateWorkout"-->
+        <!--android:orderInCategory="1"-->
+        <!--android:title="Cancel"-->
+        <!--android:icon="@drawable/baseline_clear_white_18dp"-->
+        <!--app:showAsAction="always" />-->
+    <item
+        android:id="@+id/btnCreateWorkoutSave"
+        android:orderInCategory="100"
+        android:title="Save"
+        app:showAsAction="always" />
+</menu>

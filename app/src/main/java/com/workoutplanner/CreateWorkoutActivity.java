@@ -1,9 +1,13 @@
 package com.workoutplanner;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,23 +26,18 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
     EditText txtWorkoutName;
     Button btnSaveWorkout;
-    Button btnAddExercise;
+    FloatingActionButton btnAddExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_workout);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnSaveWorkout = findViewById(R.id.btnCreateWorkoutSave);
+
         txtWorkoutName = findViewById(R.id.txtWorkoutName);
         btnAddExercise = findViewById(R.id.btnAddExercise);
 
-        btnSaveWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveWorkout();
-            }
-        });
 
         btnAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +46,16 @@ public class CreateWorkoutActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
+    }
+
+    private void showActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled (true);
+        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     private void saveWorkout() {
@@ -61,4 +67,28 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
         finish();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.create_workout, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.btnCreateWorkoutSave) {
+            saveWorkout();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

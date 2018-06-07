@@ -20,11 +20,24 @@
         <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
         <item name="colorControlHighlight">@color/accent</item>
         <item name="colorAccent">@color/primary</item>
+
+        <item name="android:textSize">14dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:height">36dp</item>
     </style>
 
     <style name="PrimaryButton" parent="Theme.AppCompat">
         <item name="colorButtonNormal">@color/primary</item>
         <item name="colorControlHighlight">@color/accent</item>
+        <item name="android:radius">4dp</item>
+        <!--<item name="android:elevation">2dp</item>-->
+        <!--<item name="android:font">@font/roboto_regular</item>-->
+        <item name="android:textSize">14dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:height">36dp</item>
+
     </style>
 
     <style name="SecondaryFlatButton" parent="Theme.AppCompat.Light">
@@ -34,8 +47,14 @@
     </style>
 
     <style name="SecondaryButton" parent="Theme.AppCompat">
-        <item name="colorButtonNormal">@color/primary</item>
+        <item name="colorButtonNormal">@color/accent</item>
         <item name="colorControlHighlight">@color/accent</item>
+
+        <item name="android:textSize">14dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:height">36dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
