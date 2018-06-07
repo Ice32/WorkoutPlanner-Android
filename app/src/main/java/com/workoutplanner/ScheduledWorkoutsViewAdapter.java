@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.workoutplanner.ScheduledWorkoutsListFragment.OnListFragmentInteractionListener;
@@ -44,7 +44,7 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
         holder.mScheduledDateView.setText(
                 simpleDateFormat.format(mValues.get(position).time)
         );
-        Button btnOpenCompleteWorkout = holder.mView.findViewById(R.id.btnOpenCompleteWorkout);
+        ImageView btnOpenCompleteWorkout = holder.mView.findViewById(R.id.btnOpenCompleteWorkout);
         btnOpenCompleteWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,8 +78,8 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mNameView = view.findViewById(R.id.name);
-            mScheduledDateView = view.findViewById(R.id.scheduled_date);
+            mNameView = view.findViewById(R.id.scheduledWorkoutsHeader);
+            mScheduledDateView = view.findViewById(R.id.scheduledWorkoutsSubHeader);
         }
 
         @Override

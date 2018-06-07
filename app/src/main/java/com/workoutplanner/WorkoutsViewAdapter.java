@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.workoutplanner.WorkoutsListFragment.OnListFragmentInteractionListener;
@@ -42,7 +42,7 @@ public class WorkoutsViewAdapter extends RecyclerView.Adapter<WorkoutsViewAdapte
                 "Exercises: " + String.valueOf(mValues.get(position).exercises.size())
         );
 
-        Button btnOpenScheduleWorkout = holder.mView.findViewById(R.id.btnOpenScheduleWorkout);
+        ImageView btnOpenScheduleWorkout = holder.mView.findViewById(R.id.btnOpenScheduleWorkout);
         btnOpenScheduleWorkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,8 +76,8 @@ public class WorkoutsViewAdapter extends RecyclerView.Adapter<WorkoutsViewAdapte
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mNameView = view.findViewById(R.id.name);
-            mExericesCountView = view.findViewById(R.id.exercises_count);
+            mNameView = view.findViewById(R.id.createdWorkoutsHeader);
+            mExericesCountView = view.findViewById(R.id.createdWorkoutsSubHeader);
         }
 
         @Override
