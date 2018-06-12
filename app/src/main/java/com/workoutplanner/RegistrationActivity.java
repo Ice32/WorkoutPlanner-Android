@@ -30,7 +30,6 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
-        TextView signInText = findViewById(R.id.alreadyHaveAccountPartTwo);
 
         Button mEmailRegistrationButton = findViewById(R.id.email_registration_button);
         mEmailRegistrationButton.setOnClickListener(new View.OnClickListener() {
@@ -42,15 +41,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mRegistrationFormView = findViewById(R.id.registration_form);
         mProgressView = findViewById(R.id.registration_progress);
-
-        signInText.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
