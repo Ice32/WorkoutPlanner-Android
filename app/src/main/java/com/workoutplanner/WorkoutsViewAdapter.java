@@ -42,14 +42,6 @@ public class WorkoutsViewAdapter extends RecyclerView.Adapter<WorkoutsViewAdapte
                 "Exercises: " + String.valueOf(mValues.get(position).exercises.size())
         );
 
-        ImageView btnOpenScheduleWorkout = holder.mView.findViewById(R.id.btnOpenScheduleWorkout);
-        btnOpenScheduleWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onScheduleButtonClick(holder.mItem);
-            }
-        });
-
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -63,7 +63,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+//        getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
@@ -89,18 +89,14 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         Intent intent = null;
-        if (id == R.id.nav_create) {
-            intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
-        } else if (id == R.id.nav_schedule) {
-            intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
-        } else if (id == R.id.nav_mark_as_completed) {
-            intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
-        } else if (id == R.id.nav_history) {
+        if (id == R.id.nav_history) {
             intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
         } else if (id == R.id.created_activities) {
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         }
-        startActivity(intent);
+        if (intent != null) {
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -115,8 +111,8 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onButtonClick(ScheduledWorkout item) {
-        Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
+//        startActivity(intent);
     }
 
 }

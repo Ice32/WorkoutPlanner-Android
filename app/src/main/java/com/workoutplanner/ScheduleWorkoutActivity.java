@@ -28,7 +28,6 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
         Spinner spinnerWorkoutDay = findViewById(R.id.spinnerWorkoutDay);
         spinnerWorkoutDay.setVisibility(View.INVISIBLE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, getWorkoutDayDropdownItems());

@@ -55,7 +55,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled (true);
-        actionBar.setDisplayShowTitleEnabled(false);
     }
 
     private void saveWorkout() {
