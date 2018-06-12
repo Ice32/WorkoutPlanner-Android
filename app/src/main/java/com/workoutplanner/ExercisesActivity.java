@@ -2,6 +2,7 @@ package com.workoutplanner;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,17 +11,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.workoutplanner.history.DoneWorkoutsListFragment;
-import com.workoutplanner.model.ScheduledWorkout;
-
-public class WorkoutHistoryActivity extends AppCompatActivity implements DoneWorkoutsListFragment.OnListFragmentInteractionListener,
-        NavigationView.OnNavigationItemSelectedListener {
-
+public class ExercisesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    FloatingActionButton btnAddExercise;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.done_workouts_container);
+        setContentView(R.layout.exercises_container);
+
+        btnAddExercise = findViewById(R.id.btnAddExercise);
+
+        btnAddExercise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateNewExerciseActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,22 +45,16 @@ public class WorkoutHistoryActivity extends AppCompatActivity implements DoneWor
     }
 
     @Override
-    public void onListFragmentInteraction(ScheduledWorkout item) {
-
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         Intent intent = null;
-        if (id == R.id.created_workouts) {
+        if (id == R.id.nav_history) {
+            intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+        } else if (id == R.id.created_workouts) {
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         } else if (id == R.id.nav_scheduled) {
             intent = new Intent(getApplicationContext(), HomeActivity.class);
-        } else if (id == R.id.created_exercises) {
-            intent = new Intent(getApplicationContext(), ExercisesActivity.class);
         }
         if (intent != null) {
             startActivity(intent);

@@ -9,9 +9,13 @@
             android:icon="@drawable/calendar"
             android:title="Scheduled workouts" />
         <item
-            android:id="@+id/created_activities"
-            android:icon="@drawable/stationary_bicycle"
+            android:id="@+id/created_workouts"
+            android:icon="@drawable/ic_created_workouts"
             android:title="Created workouts" />
+        <item
+            android:id="@+id/created_exercises"
+            android:icon="@drawable/stationary_bicycle"
+            android:title="Created exercises" />
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/history"

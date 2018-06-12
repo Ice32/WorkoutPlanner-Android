@@ -91,8 +91,10 @@ public class HomeActivity extends AppCompatActivity
         Intent intent = null;
         if (id == R.id.nav_history) {
             intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
-        } else if (id == R.id.created_activities) {
+        } else if (id == R.id.created_workouts) {
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
+        } else if (id == R.id.created_exercises) {
+            intent = new Intent(getApplicationContext(), ExercisesActivity.class);
         }
         if (intent != null) {
             startActivity(intent);

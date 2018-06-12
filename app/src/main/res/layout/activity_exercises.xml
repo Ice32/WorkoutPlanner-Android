@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExercisesActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/exercise1"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
+        <TextView
+            android:id="@+id/addedExerciseHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/materialListHeaderSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:text="Lower back stretch" />
+        <TextView
+            android:id="@+id/addedExerciseSubHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 sets, 5 reps"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintTop_toBottomOf="@+id/addedExerciseHeader"
+            android:layout_marginTop="6dp"
+            android:textSize="@dimen/materialListSubHeaderSize"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/exercise2"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/exercise1"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
+        <TextView
+            android:id="@+id/addedExerciseHeader2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/materialListHeaderSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:text="Psoas stretch" />
+        <TextView
+            android:id="@+id/addedExerciseSubHeader2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 sets, 60 seconds each"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintTop_toBottomOf="@+id/addedExerciseHeader2"
+            android:layout_marginTop="6dp"
+            android:textSize="@dimen/materialListSubHeaderSize"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/exercise3"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/exercise2"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
+        <TextView
+            android:id="@+id/addedExerciseHeader3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/materialListHeaderSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:text="Squat" />
+        <TextView
+            android:id="@+id/addedExerciseSubHeader3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 sets, 60 seconds each"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintTop_toBottomOf="@+id/addedExerciseHeader3"
+            android:layout_marginTop="6dp"
+            android:textSize="@dimen/materialListSubHeaderSize"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/exercise4"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/exercise3"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
+        <TextView
+            android:id="@+id/addedExerciseHeader4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/materialListHeaderSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="12dp"
+            android:text="Crunch" />
+        <TextView
+            android:id="@+id/addedExerciseSubHeader4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 sets, 60 seconds each"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintTop_toBottomOf="@+id/addedExerciseHeader4"
+            android:layout_marginTop="6dp"
+            android:textSize="@dimen/materialListSubHeaderSize"
+            />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnAddExercise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
+
+</android.support.constraint.ConstraintLayout>

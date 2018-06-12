@@ -21,6 +21,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,15 +30,15 @@
             android:label="Scheduled workouts"
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".CreateWorkoutActivity"
             android:label="Create a workout" />
-        <activity android:name=".CreateNewExerciseActivity" />
+        <activity android:name=".CreateNewExerciseActivity" android:label="Create new exercise" />
         <activity
             android:name=".RegistrationActivity"
             android:label="Sign up" />
@@ -54,6 +55,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".AddExistingExerciseActivity" />
         <activity android:name=".SetsAndRepsSelectorActivity" />
+        <activity
+            android:name=".ExercisesActivity"
+            android:label="Exercises"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
