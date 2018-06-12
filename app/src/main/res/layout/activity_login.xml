@@ -29,15 +29,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="WorkoutPlanner"
-                android:textSize="30sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/abrilfatface_regular"
-                android:textAlignment="center"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_workout_planner_logo" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

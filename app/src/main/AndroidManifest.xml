@@ -36,8 +36,8 @@
         <activity android:name=".CreateWorkoutActivity" />
         <activity android:name=".CreateNewExerciseActivity" />
         <activity android:name=".CompleteWorkoutActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".ScheduleWorkoutActivity" />
+        <activity android:name=".RegistrationActivity" android:label="Sign up" />
+        <activity android:name=".ScheduleWorkoutActivity" android:label="Schedule workout" />
         <activity android:name=".WorkoutHistoryActivity" android:label="Done workouts" />
         <activity android:name=".CreatedWorkoutsActivity" />
         <activity android:name=".AddExistingExerciseActivity" />

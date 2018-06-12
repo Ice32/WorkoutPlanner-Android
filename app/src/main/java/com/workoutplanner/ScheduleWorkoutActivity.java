@@ -3,6 +3,8 @@ package com.workoutplanner;
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,16 +26,15 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
         setContentView(R.layout.activity_schedule_workout);
 
         Spinner spinnerWorkoutDay = findViewById(R.id.spinnerWorkoutDay);
+        spinnerWorkoutDay.setVisibility(View.INVISIBLE);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, getWorkoutDayDropdownItems());
 
-        btnFinishScheduleExact = findViewById(R.id.btnFinishScheduleExact);
-        btnFinishScheduleRepeating = findViewById(R.id.btnFinishScheduleRepeating);
         txtExactDate = findViewById(R.id.txtExactDate);
 
-        btnFinishScheduleExact.setOnClickListener(backToHome);
-        btnFinishScheduleRepeating.setOnClickListener(backToHome);
         txtExactDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +45,29 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
         });
 
         spinnerWorkoutDay.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.schedule_workout, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.btnScheduleWorkoutSave) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
