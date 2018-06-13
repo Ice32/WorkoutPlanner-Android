@@ -26,7 +26,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
     EditText txtWorkoutName;
     Button btnSaveWorkout;
-    FloatingActionButton btnAddExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +35,6 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
 
         txtWorkoutName = findViewById(R.id.txtWorkoutName);
-        btnAddExercise = findViewById(R.id.btnAddExercise);
-
-
-        btnAddExercise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddExistingExerciseActivity.class);
-                startActivity(intent);
-            }
-        });
         showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
