@@ -15,4 +15,5 @@
     <dimen name="materialListSubHeaderSize">14dp</dimen>
     <dimen name="material_list_three_lines_height">88dp</dimen>
     <dimen name="materialListOverlineSize">10dp</dimen>
+    <dimen name="schedule_text_size">18sp</dimen>
 </resources>
