@@ -17,6 +17,7 @@
         android:textSize="@dimen/materialListHeaderSize"
         android:text="aa sger igejr "
         app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/primary_text"
         android:layout_marginTop="12dp"/>
     <TextView
         android:id="@+id/createdWorkoutsSubHeader"

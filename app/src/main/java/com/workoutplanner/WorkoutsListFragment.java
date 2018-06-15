@@ -106,6 +106,5 @@ public class WorkoutsListFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         void onListFragmentInteraction(Workout item);
-        void onScheduleButtonClick(Workout item);
     }
 }

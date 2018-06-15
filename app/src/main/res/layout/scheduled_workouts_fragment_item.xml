@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:textSize="@dimen/materialListHeaderSize"
+        android:textColor="@color/primary_text"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="Morning yoga"
         android:layout_marginTop="12dp"/>
     <TextView
         android:id="@+id/scheduledWorkoutsSubHeader"
@@ -26,13 +28,26 @@
         app:layout_constraintTop_toBottomOf="@+id/scheduledWorkoutsHeader"
         android:layout_marginTop="6dp"
         android:textSize="@dimen/materialListSubHeaderSize"
+        android:text="15/12"
+        />
+    <TextView
+        android:id="@+id/scheduledWorkoutsSubHeader2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintTop_toBottomOf="@+id/scheduledWorkoutsHeader"
+        app:layout_constraintLeft_toRightOf="@+id/scheduledWorkoutsSubHeader"
+        android:layout_marginTop="6dp"
+        android:textSize="@dimen/materialListSubHeaderSize"
+        android:text="13:30"
+        android:layout_marginLeft="10dp"
         />
 
     <ImageView
         android:id="@+id/btnOpenCompleteWorkout"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        app:srcCompat="@drawable/ic_baseline_done_24px"
+        app:srcCompat="@drawable/success"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

@@ -19,8 +19,7 @@ import java.util.logging.Logger;
 
 public class CreatedWorkoutsActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
-        WorkoutsListFragment.OnListFragmentInteractionListener,
-        ScheduledWorkoutsListFragment.OnListFragmentInteractionListener {
+        WorkoutsListFragment.OnListFragmentInteractionListener {
 
     FloatingActionButton btnCreateWorkout;
 
@@ -55,12 +54,7 @@ public class CreatedWorkoutsActivity extends AppCompatActivity implements
 
     @Override
     public void onListFragmentInteraction(Workout item) {
-        Logger.getAnonymousLogger().info("Clicked");
-    }
-
-    @Override
-    public void onScheduleButtonClick(Workout item) {
-        Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EditWorkoutActivity.class);
         startActivity(intent);
     }
 
@@ -87,13 +81,4 @@ public class CreatedWorkoutsActivity extends AppCompatActivity implements
         return true;
     }
 
-    @Override
-    public void onListFragmentInteraction(ScheduledWorkout item) {
-
-    }
-
-    @Override
-    public void onButtonClick(ScheduledWorkout item) {
-
-    }
 }

@@ -23,7 +23,8 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
 
     private final List<ScheduledWorkout> mValues;
     private final OnListFragmentInteractionListener mListener;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM HH:mm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd/MM");
+    private SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm");
 
     public ScheduledWorkoutsViewAdapter(List<ScheduledWorkout> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -43,6 +44,9 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
         holder.mNameView.setText(mValues.get(position).workout.name);
         holder.mScheduledDateView.setText(
                 simpleDateFormat.format(mValues.get(position).time)
+        );
+        holder.mScheduledTimeView.setText(
+                simpleTimeFormat.format(mValues.get(position).time)
         );
         ImageView btnOpenCompleteWorkout = holder.mView.findViewById(R.id.btnOpenCompleteWorkout);
         btnOpenCompleteWorkout.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +77,7 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
         public final View mView;
         public final TextView mNameView;
         public final TextView mScheduledDateView;
+        public final TextView mScheduledTimeView;
         public ScheduledWorkout mItem;
 
         public ViewHolder(View view) {
@@ -80,6 +85,7 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
             mView = view;
             mNameView = view.findViewById(R.id.scheduledWorkoutsHeader);
             mScheduledDateView = view.findViewById(R.id.scheduledWorkoutsSubHeader);
+            mScheduledTimeView = view.findViewById(R.id.scheduledWorkoutsSubHeader2);
         }
 
         @Override

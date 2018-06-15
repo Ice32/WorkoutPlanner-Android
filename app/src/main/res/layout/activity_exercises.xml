@@ -22,6 +22,7 @@
             android:textSize="@dimen/materialListHeaderSize"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
+            android:textColor="@color/primary_text"
             android:text="Lower back stretch" />
         <TextView
             android:id="@+id/addedExerciseSubHeader"
@@ -50,6 +51,7 @@
             android:textSize="@dimen/materialListHeaderSize"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
+            android:textColor="@color/primary_text"
             android:text="Psoas stretch" />
         <TextView
             android:id="@+id/addedExerciseSubHeader2"
@@ -78,6 +80,7 @@
             android:textSize="@dimen/materialListHeaderSize"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
+            android:textColor="@color/primary_text"
             android:text="Squat" />
         <TextView
             android:id="@+id/addedExerciseSubHeader3"
@@ -106,6 +109,7 @@
             android:textSize="@dimen/materialListHeaderSize"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
+            android:textColor="@color/primary_text"
             android:text="Crunch" />
         <TextView
             android:id="@+id/addedExerciseSubHeader4"

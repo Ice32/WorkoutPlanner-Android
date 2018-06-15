@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="-5dp">
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/txtWorkoutName"
             android:layout_width="match_parent"
@@ -37,7 +36,9 @@
         android:id="@+id/exercise1"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_below="@+id/exercisesSubHeader">
+        android:layout_below="@+id/exercisesSubHeader"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
         <TextView
             android:id="@+id/addedExerciseHeader"
             android:layout_width="wrap_content"
@@ -70,7 +71,9 @@
         android:id="@+id/exercise2"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_below="@+id/exercise1">
+        android:layout_below="@+id/exercise1"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
         <TextView
             android:id="@+id/addedExerciseHeader2"
             android:layout_width="wrap_content"
@@ -103,7 +106,9 @@
         android:id="@+id/exercise3"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_below="@+id/exercise2">
+        android:layout_below="@+id/exercise2"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
         <TextView
             android:id="@+id/addedExerciseHeader3"
             android:layout_width="wrap_content"
@@ -136,7 +141,9 @@
         android:id="@+id/exercise4"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_below="@+id/exercise3">
+        android:layout_below="@+id/exercise3"
+        android:paddingLeft="@dimen/material_list_two_lines_side_padding"
+        android:paddingRight="@dimen/material_list_two_lines_side_padding">
         <TextView
             android:id="@+id/addedExerciseHeader4"
             android:layout_width="wrap_content"

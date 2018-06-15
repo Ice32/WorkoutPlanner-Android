@@ -7,7 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="mtrl_card_spacing">10dp</dimen>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="top_level_side_padding">15dp</dimen>
+    <dimen name="top_level_side_padding">16dp</dimen>
     <dimen name="header_size">20sp</dimen>
     <dimen name="home_icons_size">30dp</dimen>
     <dimen name="material_list_two_lines_side_padding">16dp</dimen>
