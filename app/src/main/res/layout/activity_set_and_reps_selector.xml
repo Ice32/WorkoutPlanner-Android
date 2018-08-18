@@ -24,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sets"
+                android:fontFamily="@font/roboto_regular"
                 android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -37,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Reps"
+                android:fontFamily="@font/roboto_regular"
                 android:inputType="number"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -49,6 +51,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:theme="@style/PrimaryButton"
+        android:fontFamily="@font/roboto_medium"
         android:text="Add"/>
 
 </android.support.constraint.ConstraintLayout>

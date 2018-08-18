@@ -50,7 +50,7 @@ public class ExercisesActivity extends AppCompatActivity implements NavigationVi
 
         Intent intent = null;
         if (id == R.id.nav_history) {
-            intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+            intent = new Intent(getApplicationContext(), WorkoutStatisticsActivity.class);
         } else if (id == R.id.created_workouts) {
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         } else if (id == R.id.nav_scheduled) {

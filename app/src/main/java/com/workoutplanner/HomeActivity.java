@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.workoutplanner.model.ScheduledWorkout;
-import com.workoutplanner.model.Workout;
 
 import java.util.logging.Logger;
 
@@ -33,7 +32,7 @@ public class HomeActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SelectWorkoutActivity.class);
                 startActivity(intent);
             }
         });
@@ -90,7 +89,7 @@ public class HomeActivity extends AppCompatActivity
 
         Intent intent = null;
         if (id == R.id.nav_history) {
-            intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+            intent = new Intent(getApplicationContext(), WorkoutStatisticsActivity.class);
         } else if (id == R.id.created_workouts) {
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         } else if (id == R.id.created_exercises) {
@@ -113,7 +112,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onButtonClick(ScheduledWorkout item) {
-//        Intent intent = new Intent(getApplicationContext(), CompleteWorkoutActivity.class);
+//        Intent intent = new Intent(getApplicationContext(), SelectWorkoutActivity.class);
 //        startActivity(intent);
     }
 

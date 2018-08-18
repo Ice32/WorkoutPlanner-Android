@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.workoutplanner.model.Workout;
 
-public class CreatedWorkoutsActivity extends AppCompatActivity implements
+public class SelectWorkoutActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         WorkoutsListFragment.OnListFragmentInteractionListener {
 
@@ -23,35 +23,36 @@ public class CreatedWorkoutsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.created_workouts_container);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_select_workout);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnCreateWorkout = findViewById(R.id.btnCreateWorkout);
+//        btnCreateWorkout = findViewById(R.id.btnCreateWorkout);
+//
+//
+//        btnCreateWorkout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
-        btnCreateWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setItemIconTintList(null);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setItemIconTintList(null);
     }
 
     @Override
     public void onListFragmentInteraction(Workout item) {
-        Intent intent = new Intent(getApplicationContext(), EditWorkoutActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
         startActivity(intent);
     }
 

@@ -22,7 +22,8 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
 
     private final List<ScheduledWorkout> mValues;
     private final OnListFragmentInteractionListener mListener;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM HH:mm");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE, dd/MM");
+    private SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("HH:mm");
 
     public DoneWorkoutsViewAdapter(List<ScheduledWorkout> items, OnListFragmentInteractionListener listener) {
         mValues = items;
@@ -42,6 +43,9 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
         holder.mNameView.setText(mValues.get(position).workout.name);
         holder.mScheduledDateView.setText(
                 simpleDateFormat.format(mValues.get(position).time)
+        );
+        holder.mScheduledTimeView.setText(
+                simpleTimeFormat.format(mValues.get(position).time)
         );
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -65,20 +69,20 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
         public final View mView;
         public final TextView mNameView;
         public final TextView mScheduledDateView;
-        public final TextView mRatingView;
+        public final TextView mScheduledTimeView;
         public ScheduledWorkout mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = view.findViewById(R.id.doneWorkoutsHeader);
-            mScheduledDateView = view.findViewById(R.id.doneWorkoutsOverline);
-            mRatingView = view.findViewById(R.id.doneWorkoutsSubHeader);
+            mScheduledDateView = view.findViewById(R.id.doneWorkoutsSubHeader);
+            mScheduledTimeView = view.findViewById(R.id.doneWorkoutsSubHeader2);;
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mNameView.getText() + "'";
-        }
+//        @Override
+//        public String toString() {
+//            return super.toString() + " '" + mNameView.getText() + "'";
+//        }
     }
 }

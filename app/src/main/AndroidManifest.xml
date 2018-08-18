@@ -49,6 +49,10 @@
             android:name=".ScheduleWorkoutActivity"
             android:label="Schedule workout" />
         <activity
+            android:name=".WorkoutStatisticsActivity"
+            android:label="Statistics"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".WorkoutHistoryActivity"
             android:label="Done workouts"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -56,6 +60,9 @@
             android:name=".CreatedWorkoutsActivity"
             android:label="Created workouts"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectWorkoutActivity"
+            android:label="Select workout" />
         <activity android:name=".AddExistingExerciseActivity" />
         <activity android:name=".SetsAndRepsSelectorActivity" />
         <activity

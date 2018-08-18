@@ -18,8 +18,8 @@
             android:title="Created exercises" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/history"
-            android:title="My history" />
+            android:icon="@drawable/ic_graph"
+            android:title="My statistics" />
     </group>
 
 </menu>
