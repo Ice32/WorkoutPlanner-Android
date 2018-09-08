@@ -6,16 +6,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.workoutplanner.api.implementation.MockWorkoutsAPI;
-import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.Workout;
 
 public class EditWorkoutActivity extends AppCompatActivity {
 
-    private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
+//    private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
 
     EditText txtWorkoutName;
 
@@ -43,7 +40,7 @@ public class EditWorkoutActivity extends AppCompatActivity {
 
         Workout w = new Workout(name);
 
-        workoutsAPI.addWorkout(w);
+//        workoutsAPI.addWorkout(w);
 
         finish();
     }

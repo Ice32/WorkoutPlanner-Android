@@ -5,8 +5,21 @@ import com.workoutplanner.model.Workout;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+
 public interface WorkoutsAPI {
-    public List<Workout> getCreatedWorkouts();
-    public void addWorkout(Workout workout);
-    public List<ScheduledWorkout> getScheduledWorkouts();
+    @GET("/workouts")
+    Call<List<Workout>> getCreatedWorkouts();
+
+    @POST("/workouts")
+    Call<Workout> createWorkout(@Body Workout workout);
+
+    @GET("/scheduled_workouts")
+    Call<List<ScheduledWorkout>> getScheduledWorkouts();
+
+    @GET("/scheduled_workouts/done")
+    Call<List<ScheduledWorkout>> getDoneScheduledWorkouts();
 }

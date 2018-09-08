@@ -5,10 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -17,15 +20,29 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.workoutplanner.api.LoginSubmissionData;
+import com.workoutplanner.api.interfaces.UsersAPI;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
+    private final String LOG_TAG = this.getClass().getSimpleName();
+
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    UsersAPI usersAPI = retrofit.create(UsersAPI.class);
 
     private UserLoginTask mAuthTask = null;
-    private static final String[] DUMMY_CREDENTIALS = new String[] {
-            "test@mail.com:testtest",
-    };
 
     // UI references.
     private EditText mEmailView;
@@ -44,19 +61,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
-
         mPasswordView = findViewById(R.id.password);
+
+        mEmailView.setText("Kenan@mail.com");
+        mPasswordView.setText("password");
+
         TextView createAccountText = findViewById(R.id.noAccountPartTwo);
-//        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-//                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-//                    attemptLogin();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
 
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -77,6 +87,13 @@ public class LoginActivity extends Activity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), null);
+        if (jwtToken != null) {
+            Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -224,25 +241,27 @@ public class LoginActivity extends Activity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            LoginSubmissionData loginData = new LoginSubmissionData(mEmail, mPassword);
 
+            Call<Void> loginRequest = usersAPI.loginUser(loginData);
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                Response<Void> response = loginRequest.execute();
+                if(response.isSuccessful()) {
+                    String token = response.headers().get("Authorization");
+
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.jwt_token), token);
+                    editor.commit();
+                    return true;
+                } else {
+                    System.out.println(response.errorBody());
+                    return false;
+                }
+            } catch (IOException e) {
+                Log.e(LOG_TAG, e.getMessage());
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return false;
         }
 
         @Override

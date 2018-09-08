@@ -13,7 +13,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ExercisesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.workoutplanner.existingExercises.ExistingExerciseListFragment;
+import com.workoutplanner.model.Exercise;
+
+public class ExercisesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ExistingExerciseListFragment.OnListFragmentInteractionListener {
     FloatingActionButton btnAddExercise;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +66,10 @@ public class ExercisesActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(Exercise item) {
+
     }
 }

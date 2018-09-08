@@ -1,19 +1,29 @@
 package com.workoutplanner.history;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.workoutplanner.R;
+import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.ScheduledWorkout;
-import com.workoutplanner.service.implementation.WorkoutsServiceImpl;
-import com.workoutplanner.service.interfaces.WorkoutsService;
+import com.workoutplanner.service.ServiceGenerator;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -23,7 +33,8 @@ import com.workoutplanner.service.interfaces.WorkoutsService;
  * interface.
  */
 public class DoneWorkoutsListFragment extends Fragment {
-    private WorkoutsService workoutsService = new WorkoutsServiceImpl();
+    private final String LOG_TAG = this.getClass().getSimpleName();
+    private WorkoutsAPI workoutsAPI;
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
@@ -52,6 +63,10 @@ public class DoneWorkoutsListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
+        workoutsAPI = ServiceGenerator.createService(WorkoutsAPI.class, jwtToken);
     }
 
     @Override
@@ -61,16 +76,37 @@ public class DoneWorkoutsListFragment extends Fragment {
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+            final RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new DoneWorkoutsViewAdapter(
-                workoutsService.getAllScheduledWorkouts(),
+                new ArrayList<ScheduledWorkout>(),
                 mListener
             ));
+
+            Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getDoneScheduledWorkouts();
+            workoutsRequest.enqueue(new Callback<List<ScheduledWorkout>>() {
+                @Override
+                public void onResponse(Call<List<ScheduledWorkout>> call, Response<List<ScheduledWorkout>> response) {
+                    if(response.isSuccessful()) {
+                        List<ScheduledWorkout> workouts = response.body();
+                        recyclerView.setAdapter(new DoneWorkoutsViewAdapter(
+                                workouts,
+                                mListener
+                        ));
+                    } else {
+                        System.out.println(response.errorBody());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<ScheduledWorkout>> call, Throwable t) {
+                    Log.e(LOG_TAG, t.getMessage());
+                }
+            });
         }
         return view;
     }

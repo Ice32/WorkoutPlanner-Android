@@ -63,7 +63,7 @@ public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingEx
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mNameView = view.findViewById(R.id.name);
+            mNameView = view.findViewById(R.id.addedExerciseHeader);
         }
 
         @Override

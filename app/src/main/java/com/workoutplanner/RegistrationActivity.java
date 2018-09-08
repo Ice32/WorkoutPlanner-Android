@@ -4,30 +4,54 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.workoutplanner.api.ApiResponse;
+import com.workoutplanner.api.LoginSubmissionData;
+import com.workoutplanner.api.interfaces.UsersAPI;
+import com.workoutplanner.model.User;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistrationActivity extends AppCompatActivity {
+    private final String LOG_TAG = this.getClass().getSimpleName();
 
     private RegistrationActivity.UserRegistrationTask mAuthTask = null;
 
     // UI references.
+    private EditText mFullNameView;
     private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mRegistrationFormView;
 
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    UsersAPI usersAPI = retrofit.create(UsersAPI.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        mFullNameView = findViewById(R.id.fullName);
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
 
@@ -53,6 +77,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
+        String fullName = mFullNameView.getText().toString();
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
@@ -84,8 +109,9 @@ public class RegistrationActivity extends AppCompatActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user registration attempt.
             showProgress(true);
-            mAuthTask = new RegistrationActivity.UserRegistrationTask(email, password);
+            mAuthTask = new RegistrationActivity.UserRegistrationTask(email, fullName, password);
             mAuthTask.execute((Void) null);
+
         }
     }
 
@@ -140,40 +166,63 @@ public class RegistrationActivity extends AppCompatActivity {
      * Represents an asynchronous registration task used to authenticate
      * the user.
      */
-    public class UserRegistrationTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserRegistrationTask extends AsyncTask<Void, Void, String> {
 
         private final String mEmail;
         private final String mPassword;
+        private final String fullName;
 
-        UserRegistrationTask(String email, String password) {
+        UserRegistrationTask(String email, String fullName, String password) {
             mEmail = email;
             mPassword = password;
+            this.fullName = fullName;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: Add server logic here
+        protected String doInBackground(Void... params) {
+            User user = new User(mEmail, fullName, mPassword);
+
+            Call<ApiResponse<Void>> registrationRequest = usersAPI.registerUser(user);
             try {
-                // Simulate network access.
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+                Response<ApiResponse<Void>> response = registrationRequest.execute();
+                if(response.isSuccessful()) {
+                    Call<Void> loginRequest = usersAPI.loginUser(new LoginSubmissionData(mEmail, mPassword));
+                    Response<Void> loginResponse = loginRequest.execute();
+                    String token = loginResponse.headers().get("Authorization");
 
-            return true;
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(getString(R.string.jwt_token), token);
+                    editor.commit();
+                    return null;
+                } else {
+                    System.out.println(response.errorBody());
+                    Gson gson = new Gson();
+                    String responseDataString = response.errorBody().string();
+                    ApiResponse<Void> responseData = gson.fromJson(responseDataString, ApiResponse.class);
+                    if (responseData.getError().equals(ApiErrors.DUPLICATE_EMAIL)) {
+                        return "Email already in use";
+                    }
+                    return "Unknown error";
+                }
+            } catch (IOException e) {
+                Log.e(LOG_TAG, e.getMessage());
+                return "Unknown error";
+            }
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
+        protected void onPostExecute(final String error) {
             mAuthTask = null;
             showProgress(false);
 
-            if (success) {
+            if (error == null) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                mEmailView.setError(error);
+                mEmailView.requestFocus();
+
             }
         }
 

@@ -1,28 +1,29 @@
 package com.workoutplanner;
 
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.workoutplanner.api.implementation.MockWorkoutsAPI;
 import com.workoutplanner.api.interfaces.WorkoutsAPI;
-import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
+import com.workoutplanner.service.ServiceGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateWorkoutActivity extends AppCompatActivity {
+    private final String LOG_TAG = this.getClass().getSimpleName();
 
-    private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
+    private WorkoutsAPI workoutsAPI;
 
     EditText txtWorkoutName;
     Button btnSaveWorkout;
@@ -38,6 +39,10 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
+        workoutsAPI = ServiceGenerator.createService(WorkoutsAPI.class, jwtToken);
     }
 
     private void showActionBar() {
@@ -51,7 +56,21 @@ public class CreateWorkoutActivity extends AppCompatActivity {
 
         Workout w = new Workout(name);
 
-        workoutsAPI.addWorkout(w);
+        Call<Workout> workoutRequest = workoutsAPI.createWorkout(w);
+        workoutRequest.enqueue(new Callback<Workout>() {
+            @Override
+            public void onResponse(Call<Workout> call, Response<Workout> response) {
+                if(!response.isSuccessful()) {
+                    Log.e(LOG_TAG, response.errorBody().toString());
+                    System.out.println(response.errorBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Workout> call, Throwable t) {
+                Log.e(LOG_TAG, t.getMessage());
+            }
+        });
 
         finish();
     }
