@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.workoutplanner.existingExercises.SelectableExerciseFragment;
+import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 
-public class EditWorkoutActivity extends AppCompatActivity {
+public class EditWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
 
 //    private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
 
@@ -68,4 +70,8 @@ public class EditWorkoutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onListFragmentInteraction(Exercise item) {
+
+    }
 }

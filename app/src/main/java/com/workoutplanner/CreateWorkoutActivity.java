@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.workoutplanner.api.interfaces.WorkoutsAPI;
+import com.workoutplanner.existingExercises.SelectableExerciseFragment;
+import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.ServiceGenerator;
 
@@ -20,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CreateWorkoutActivity extends AppCompatActivity {
+public class CreateWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
     private WorkoutsAPI workoutsAPI;
@@ -98,4 +100,8 @@ public class CreateWorkoutActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onListFragmentInteraction(Exercise item) {
+
+    }
 }
