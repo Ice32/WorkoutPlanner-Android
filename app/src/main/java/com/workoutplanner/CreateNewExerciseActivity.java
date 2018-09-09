@@ -21,13 +21,19 @@ import retrofit2.Response;
 public class CreateNewExerciseActivity extends AppCompatActivity{
     private final String LOG_TAG = this.getClass().getSimpleName();
     private ExercisesAPI exercisesAPI;
+
     private EditText txtExerciseName;
+    private EditText txtNumSets;
+    private EditText txtNumReps;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_exercise);
 
         txtExerciseName = findViewById(R.id.txtExerciseName);
+        txtNumSets = findViewById(R.id.txtNumSets);
+        txtNumReps = findViewById(R.id.txtNumReps);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
@@ -47,8 +53,10 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
 
     private void saveExercise() {
         String name = txtExerciseName.getText().toString();
+        Integer sets = Integer.parseInt(txtNumSets.getText().toString());
+        Integer reps = Integer.parseInt(txtNumReps.getText().toString());
 
-        Exercise exercise = new Exercise(name);
+        Exercise exercise = new Exercise(name, sets, reps);
 
         Call<Exercise> exerciseRequest = exercisesAPI.createExercise(exercise);
         exerciseRequest.enqueue(new Callback<Exercise>() {
