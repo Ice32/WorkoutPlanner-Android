@@ -1,17 +1,37 @@
 package com.workoutplanner;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+
+import com.workoutplanner.api.interfaces.ExercisesAPI;
+import com.workoutplanner.model.Exercise;
+import com.workoutplanner.service.ServiceGenerator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CreateNewExerciseActivity extends AppCompatActivity{
+    private final String LOG_TAG = this.getClass().getSimpleName();
+    private ExercisesAPI exercisesAPI;
+    private EditText txtExerciseName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_exercise);
 
+        txtExerciseName = findViewById(R.id.txtExerciseName);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
+        exercisesAPI = ServiceGenerator.createService(ExercisesAPI.class, jwtToken);
     }
 
     @Override
@@ -19,10 +39,33 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
         int id = item.getItemId();
 
         if (id == R.id.btnAddNewExerciseSave) {
-            finish();
+            saveExercise();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveExercise() {
+        String name = txtExerciseName.getText().toString();
+
+        Exercise exercise = new Exercise(name);
+
+        Call<Exercise> exerciseRequest = exercisesAPI.createExercise(exercise);
+        exerciseRequest.enqueue(new Callback<Exercise>() {
+            @Override
+            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
+                if(!response.isSuccessful()) {
+                    Log.e(LOG_TAG, response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Exercise> call, Throwable t) {
+                Log.e(LOG_TAG, t.getMessage());
+            }
+        });
+
+        finish();
     }
 
     @Override
