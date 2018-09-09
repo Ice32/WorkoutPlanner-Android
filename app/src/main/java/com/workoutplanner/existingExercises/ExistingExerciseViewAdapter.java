@@ -36,7 +36,10 @@ public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingEx
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mNameView.setText(mValues.get(position).name);
+        Exercise exercise = mValues.get(position);
+        holder.mNameView.setText(exercise.name);
+        String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
+        holder.mSetsRepsView.setText(setsReps);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,12 +61,14 @@ public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingEx
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
+        public final TextView mSetsRepsView;
         public Exercise mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = view.findViewById(R.id.addedExerciseHeader);
+            mSetsRepsView = view.findViewById(R.id.addedExerciseSubHeader);
         }
 
         @Override

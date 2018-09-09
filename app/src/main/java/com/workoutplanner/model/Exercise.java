@@ -3,8 +3,8 @@ package com.workoutplanner.model;
 public class Exercise {
     public int id;
     public String name;
-    public int defaultSets;
-    public int defaultReps;
+    public int sets;
+    public int reps;
 
     public Exercise(String name) {
         this.name = name;
@@ -15,10 +15,9 @@ public class Exercise {
         this.name = name;
     }
 
-    public Exercise(int id, String name, int defaultSets, int defaultReps) {
-        this.id = id;
+    public Exercise(String name, int sets, int reps) {
         this.name = name;
-        this.defaultSets = defaultSets;
-        this.defaultReps = defaultReps;
+        this.sets = sets;
+        this.reps = reps;
     }
 }
