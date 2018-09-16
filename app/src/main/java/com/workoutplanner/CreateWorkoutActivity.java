@@ -1,8 +1,7 @@
 package com.workoutplanner;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,9 @@ import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.JwtTokenProvider;
 import com.workoutplanner.service.ServiceGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,9 +29,9 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
     private final String LOG_TAG = this.getClass().getSimpleName();
 
     private WorkoutsAPI workoutsAPI;
+    private List<Exercise> selectedExercises = new ArrayList<>();
 
     EditText txtWorkoutName;
-    Button btnSaveWorkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +57,20 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
     private void saveWorkout() {
         String name = txtWorkoutName.getText().toString();
 
-        Workout w = new Workout(name);
+        Workout w = new Workout(name, selectedExercises);
 
         Call<Workout> workoutRequest = workoutsAPI.createWorkout(w);
         workoutRequest.enqueue(new Callback<Workout>() {
             @Override
-            public void onResponse(Call<Workout> call, Response<Workout> response) {
+            public void onResponse(@NonNull Call<Workout> call, @NonNull Response<Workout> response) {
                 if(!response.isSuccessful()) {
-                    Log.e(LOG_TAG, response.errorBody().toString());
-                    System.out.println(response.errorBody());
+                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                 }
                 finish();
             }
 
             @Override
-            public void onFailure(Call<Workout> call, Throwable t) {
+            public void onFailure(@NonNull Call<Workout> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
                 finish();
             }
@@ -101,7 +102,11 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
     }
 
     @Override
-    public void onListFragmentInteraction(Exercise item) {
-
+    public void onListFragmentInteraction(Exercise item, boolean isChecked) {
+        if (isChecked) {
+            selectedExercises.add(item);
+        } else {
+            selectedExercises.remove(item);
+        }
     }
 }

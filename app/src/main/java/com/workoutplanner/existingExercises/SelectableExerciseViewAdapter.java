@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.workoutplanner.R;
@@ -39,14 +41,10 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
         String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
         holder.selectableExerciseSubHeader.setText(setsReps);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mListener.onListFragmentInteraction(holder.mItem, isChecked);
             }
         });
     }
@@ -60,13 +58,15 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
         public final View mView;
         public final TextView selectableExerciseHeader;
         public final TextView selectableExerciseSubHeader;
+        public final CheckBox checkBox;
         public Exercise mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             selectableExerciseHeader = view.findViewById(R.id.selectableExerciseHeader);
-            selectableExerciseSubHeader =view.findViewById(R.id.selectableExerciseSubHeader);
+            selectableExerciseSubHeader = view.findViewById(R.id.selectableExerciseSubHeader);
+            checkBox = view.findViewById(R.id.selectableExerciseCheckBox);
         }
     }
 }

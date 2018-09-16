@@ -117,6 +117,6 @@ public class SelectableExerciseFragment extends Fragment {
      * activity.
      */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Exercise item);
+        void onListFragmentInteraction(Exercise item, boolean selected);
     }
 }

@@ -71,7 +71,7 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     }
 
     @Override
-    public void onListFragmentInteraction(Exercise item) {
+    public void onListFragmentInteraction(Exercise item, boolean isSelected) {
 
     }
 }
