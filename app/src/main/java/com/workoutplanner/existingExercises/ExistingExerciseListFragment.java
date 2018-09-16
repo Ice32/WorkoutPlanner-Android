@@ -38,10 +38,6 @@ public class ExistingExerciseListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView view;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public ExistingExerciseListFragment() {
     }
 
@@ -88,7 +84,7 @@ public class ExistingExerciseListFragment extends Fragment {
                     ));
                 } else {
                     if (response.errorBody() != null) {
-                        Log.e(LOG_TAG, response.errorBody().toString());
+                        Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                     }
                 }
             }

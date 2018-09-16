@@ -50,6 +50,9 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
     }
 
     private void saveExercise() {
+        if (!validateFieldsForExerciseSave()) {
+            return;
+        }
         String name = txtExerciseName.getText().toString();
         Integer sets = Integer.parseInt(txtNumSets.getText().toString());
         Integer reps = Integer.parseInt(txtNumReps.getText().toString());
@@ -63,15 +66,28 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
                 if(!response.isSuccessful()) {
                     Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                 }
+                finish();
             }
 
             @Override
             public void onFailure(@NonNull Call<Exercise> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
+                finish();
             }
         });
-
-        finish();
+    }
+    boolean validateFieldsForExerciseSave() {
+        return assertViewValueNotEmpty(txtNumSets)
+                && assertViewValueNotEmpty(txtNumReps)
+                && assertViewValueNotEmpty(txtExerciseName);
+    }
+    boolean assertViewValueNotEmpty(EditText view) {
+       if (view.getText().toString().equals("")) {
+           view.setError("Required field");
+           view.requestFocus();
+           return  false;
+       }
+       return true;
     }
 
     @Override
