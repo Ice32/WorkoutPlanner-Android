@@ -1,8 +1,7 @@
 package com.workoutplanner;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -11,6 +10,7 @@ import android.widget.EditText;
 
 import com.workoutplanner.api.interfaces.ExercisesAPI;
 import com.workoutplanner.model.Exercise;
+import com.workoutplanner.service.JwtTokenProvider;
 import com.workoutplanner.service.ServiceGenerator;
 
 import retrofit2.Call;
@@ -35,9 +35,7 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
         txtNumSets = findViewById(R.id.txtNumSets);
         txtNumReps = findViewById(R.id.txtNumReps);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
-        exercisesAPI = ServiceGenerator.createService(ExercisesAPI.class, jwtToken);
+        exercisesAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(ExercisesAPI.class);
     }
 
     @Override
@@ -61,14 +59,14 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
         Call<Exercise> exerciseRequest = exercisesAPI.createExercise(exercise);
         exerciseRequest.enqueue(new Callback<Exercise>() {
             @Override
-            public void onResponse(Call<Exercise> call, Response<Exercise> response) {
+            public void onResponse(@NonNull Call<Exercise> call, @NonNull Response<Exercise> response) {
                 if(!response.isSuccessful()) {
-                    Log.e(LOG_TAG, response.errorBody().toString());
+                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                 }
             }
 
             @Override
-            public void onFailure(Call<Exercise> call, Throwable t) {
+            public void onFailure(@NonNull Call<Exercise> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
             }
         });

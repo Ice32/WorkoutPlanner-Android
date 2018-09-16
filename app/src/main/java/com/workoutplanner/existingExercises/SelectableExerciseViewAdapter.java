@@ -1,5 +1,6 @@
 package com.workoutplanner.existingExercises;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,7 @@ import com.workoutplanner.model.Exercise;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Exercise} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<SelectableExerciseViewAdapter.ViewHolder> {
 
     private final List<Exercise> mValues;
@@ -28,17 +25,19 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_selectableexercise, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.selectableExerciseHeader.setText(mValues.get(position).name);
-        holder.selectableExerciseSubHeader.setText("4 res");
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        Exercise exercise = mValues.get(position);
+        holder.mItem = exercise;
+        holder.selectableExerciseHeader.setText(exercise.name);
+        String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
+        holder.selectableExerciseSubHeader.setText(setsReps);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,11 +67,6 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
             mView = view;
             selectableExerciseHeader = view.findViewById(R.id.selectableExerciseHeader);
             selectableExerciseSubHeader =view.findViewById(R.id.selectableExerciseSubHeader);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + selectableExerciseSubHeader.getText() + "'";
         }
     }
 }

@@ -46,7 +46,7 @@ public class WorkoutStatisticsActivity extends AppCompatActivity implements Done
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        LineChart chart = (LineChart) findViewById(R.id.lineChart);
+        LineChart chart = findViewById(R.id.lineChart);
 
         List<Entry> numWorkoutsEntries = new ArrayList<Entry>();
         numWorkoutsEntries.add(new Entry(1, 5));
@@ -57,13 +57,7 @@ public class WorkoutStatisticsActivity extends AppCompatActivity implements Done
         LineDataSet workoutsDataSet = new LineDataSet(numWorkoutsEntries, "Number of workouts");
         workoutsDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
-//        List<Entry> numExercisesEntries = new ArrayList<Entry>();
-//        numExercisesEntries.add(new Entry(1, 11));
-//        numExercisesEntries.add(new Entry(2, 16));
-//        numExercisesEntries.add(new Entry(3, 13));
-//        LineDataSet exercisesDataSet = new LineDataSet(numExercisesEntries, "Number exercises");
-
-        LineData lineData = new LineData(workoutsDataSet/*, exercisesDataSet*/);
+        LineData lineData = new LineData(workoutsDataSet);
         chart.setData(lineData);
         chart.getAxisRight().setDrawGridLines(false);
         chart.getAxisLeft().setDrawGridLines(false);

@@ -16,6 +16,7 @@ import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.existingExercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
+import com.workoutplanner.service.JwtTokenProvider;
 import com.workoutplanner.service.ServiceGenerator;
 
 import retrofit2.Call;
@@ -42,9 +43,7 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
-        workoutsAPI = ServiceGenerator.createService(WorkoutsAPI.class, jwtToken);
+        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(WorkoutsAPI.class);
     }
 
     private void showActionBar() {
@@ -66,15 +65,16 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
                     Log.e(LOG_TAG, response.errorBody().toString());
                     System.out.println(response.errorBody());
                 }
+                finish();
             }
 
             @Override
             public void onFailure(Call<Workout> call, Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
+                finish();
             }
         });
 
-        finish();
     }
 
     @Override

@@ -22,13 +22,13 @@ import android.widget.TextView;
 
 import com.workoutplanner.api.LoginSubmissionData;
 import com.workoutplanner.api.interfaces.UsersAPI;
+import com.workoutplanner.service.JwtTokenProvider;
+import com.workoutplanner.service.ServiceGenerator;
 
 import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A login screen that offers login via email/password.
@@ -36,11 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginActivity extends Activity {
     private final String LOG_TAG = this.getClass().getSimpleName();
 
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    UsersAPI usersAPI = retrofit.create(UsersAPI.class);
+    private UsersAPI usersAPI;
 
     private UserLoginTask mAuthTask = null;
 
@@ -94,6 +90,7 @@ public class LoginActivity extends Activity {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
         }
+        usersAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(UsersAPI.class);
     }
 
 

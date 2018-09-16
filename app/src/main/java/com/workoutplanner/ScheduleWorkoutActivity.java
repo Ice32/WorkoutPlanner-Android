@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    Button btnFinishScheduleExact;
-    Button btnFinishScheduleRepeating;
     TextView txtExactDate;
 
     @Override

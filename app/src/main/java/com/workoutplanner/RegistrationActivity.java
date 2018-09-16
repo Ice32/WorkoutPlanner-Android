@@ -21,6 +21,8 @@ import com.workoutplanner.api.ApiResponse;
 import com.workoutplanner.api.LoginSubmissionData;
 import com.workoutplanner.api.interfaces.UsersAPI;
 import com.workoutplanner.model.User;
+import com.workoutplanner.service.JwtTokenProvider;
+import com.workoutplanner.service.ServiceGenerator;
 
 import java.io.IOException;
 
@@ -41,11 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private View mProgressView;
     private View mRegistrationFormView;
 
-    private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-    UsersAPI usersAPI = retrofit.create(UsersAPI.class);
+    private UsersAPI usersAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +63,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mRegistrationFormView = findViewById(R.id.registration_form);
         mProgressView = findViewById(R.id.registration_progress);
+        usersAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(UsersAPI.class);
     }
 
 

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.workoutplanner.R;
 import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.ScheduledWorkout;
+import com.workoutplanner.service.JwtTokenProvider;
 import com.workoutplanner.service.ServiceGenerator;
 
 import java.util.ArrayList;
@@ -63,10 +64,7 @@ public class DoneWorkoutsListFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), "");
-        workoutsAPI = ServiceGenerator.createService(WorkoutsAPI.class, jwtToken);
+        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(WorkoutsAPI.class);
     }
 
     @Override

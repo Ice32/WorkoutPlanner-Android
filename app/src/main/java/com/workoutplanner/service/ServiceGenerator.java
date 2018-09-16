@@ -7,22 +7,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
+    private final JwtTokenProvider tokenProvider;
 
-    public static final String API_BASE_URL = "http://10.0.2.2:8080/";
+    public ServiceGenerator(JwtTokenProvider tokenProvider) {
+
+        this.tokenProvider = tokenProvider;
+    }
+
+    private static final String API_BASE_URL = "http://10.0.2.2:8080/";
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
                     .baseUrl(API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
 
-    public static <S> S createService(Class<S> serviceClass) {
-        return createService(serviceClass, null);
-    }
+    private static Retrofit retrofit = builder.build();
 
-    private static Retrofit retrofit;
-
-    public static <S> S createService(Class<S> serviceClass, final String authToken) {
+    public <S> S createService(Class<S> serviceClass) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        final String authToken = tokenProvider.get();
         if (!TextUtils.isEmpty(authToken)) {
             AuthenticationInterceptor interceptor = new AuthenticationInterceptor(authToken);
 

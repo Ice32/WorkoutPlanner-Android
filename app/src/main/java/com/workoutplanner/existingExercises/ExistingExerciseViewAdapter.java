@@ -1,5 +1,6 @@
 package com.workoutplanner.existingExercises;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,6 @@ import com.workoutplanner.existingExercises.ExistingExerciseListFragment.OnListF
 import com.workoutplanner.model.Exercise;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingExerciseViewAdapter.ViewHolder> {
 
     private final List<Exercise> mValues;
@@ -27,16 +23,16 @@ public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingEx
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.existing_exercise_fragment_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         Exercise exercise = mValues.get(position);
+        holder.mItem = exercise;
         holder.mNameView.setText(exercise.name);
         String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
         holder.mSetsRepsView.setText(setsReps);
@@ -59,9 +55,9 @@ public class ExistingExerciseViewAdapter extends RecyclerView.Adapter<ExistingEx
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mNameView;
-        public final TextView mSetsRepsView;
+        final View mView;
+        final TextView mNameView;
+        final TextView mSetsRepsView;
         public Exercise mItem;
 
         public ViewHolder(View view) {
