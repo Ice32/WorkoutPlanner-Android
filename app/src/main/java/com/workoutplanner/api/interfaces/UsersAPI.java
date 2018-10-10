@@ -2,6 +2,7 @@ package com.workoutplanner.api.interfaces;
 
 import com.workoutplanner.api.ApiResponse;
 import com.workoutplanner.api.LoginSubmissionData;
+import com.workoutplanner.api.SimpleValueContainer;
 import com.workoutplanner.model.User;
 
 import retrofit2.Call;
@@ -14,4 +15,7 @@ public interface UsersAPI {
 
     @POST("/users/login")
     Call<Void> loginUser(@Body LoginSubmissionData user);
+
+    @POST("/users/refresh")
+    Call<Void> refreshAccessToken(@Body SimpleValueContainer<String> refreshToken);
 }

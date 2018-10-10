@@ -187,11 +187,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 if(response.isSuccessful()) {
                     Call<Void> loginRequest = usersAPI.loginUser(new LoginSubmissionData(mEmail, mPassword));
                     Response<Void> loginResponse = loginRequest.execute();
+                    String refreshToken = response.headers().get("RefreshToken");
                     String token = loginResponse.headers().get("Authorization");
 
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.jwt_token), token);
+                    editor.putString(getString(R.string.refresh_token), refreshToken);
                     editor.commit();
                     return null;
                 } else {

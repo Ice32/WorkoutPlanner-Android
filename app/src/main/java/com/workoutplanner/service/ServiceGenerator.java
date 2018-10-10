@@ -6,15 +6,14 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.workoutplanner.api.ApiConstants.API_BASE_URL;
+
 public class ServiceGenerator {
     private final JwtTokenProvider tokenProvider;
 
     public ServiceGenerator(JwtTokenProvider tokenProvider) {
-
         this.tokenProvider = tokenProvider;
     }
-
-    private static final String API_BASE_URL = "http://10.0.2.2:8080/";
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()

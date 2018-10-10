@@ -245,10 +245,12 @@ public class LoginActivity extends Activity {
                 Response<Void> response = loginRequest.execute();
                 if(response.isSuccessful()) {
                     String token = response.headers().get("Authorization");
+                    String refreshToken = response.headers().get("RefreshToken");
 
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putString(getString(R.string.jwt_token), token);
+                    editor.putString(getString(R.string.refresh_token), refreshToken);
                     editor.commit();
                     return true;
                 } else {
