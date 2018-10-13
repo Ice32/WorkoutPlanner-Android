@@ -2,6 +2,7 @@ package com.workoutplanner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.workoutplanner.model.ScheduledWorkout;
+import com.workoutplanner.service.AuthenticationService;
 
 import java.util.logging.Logger;
 
@@ -82,7 +84,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -93,6 +95,9 @@ public class HomeActivity extends AppCompatActivity
             intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
         } else if (id == R.id.created_exercises) {
             intent = new Intent(getApplicationContext(), ExercisesActivity.class);
+        } else if (id == R.id.nav_logout) {
+            new AuthenticationService(this).logout();
+            intent = new Intent(getApplicationContext(), LoginActivity.class);
         }
         if (intent != null) {
             startActivity(intent);

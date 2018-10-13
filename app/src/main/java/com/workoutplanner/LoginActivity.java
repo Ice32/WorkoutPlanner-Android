@@ -5,13 +5,10 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -21,22 +18,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.workoutplanner.api.LoginSubmissionData;
-import com.workoutplanner.api.interfaces.UsersAPI;
-import com.workoutplanner.service.JwtTokenProvider;
-import com.workoutplanner.service.ServiceGenerator;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Response;
+import com.workoutplanner.service.AuthenticationService;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
     private final String LOG_TAG = this.getClass().getSimpleName();
-
-    private UsersAPI usersAPI;
 
     private UserLoginTask mAuthTask = null;
 
@@ -84,13 +72,11 @@ public class LoginActivity extends Activity {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String jwtToken = sharedPref.getString(getString(R.string.jwt_token), null);
+        String jwtToken = new AuthenticationService(this).getAuthToken();
         if (jwtToken != null) {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
         }
-        usersAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(UsersAPI.class);
     }
 
 
@@ -239,28 +225,7 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             LoginSubmissionData loginData = new LoginSubmissionData(mEmail, mPassword);
-
-            Call<Void> loginRequest = usersAPI.loginUser(loginData);
-            try {
-                Response<Void> response = loginRequest.execute();
-                if(response.isSuccessful()) {
-                    String token = response.headers().get("Authorization");
-                    String refreshToken = response.headers().get("RefreshToken");
-
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(getString(R.string.jwt_token), token);
-                    editor.putString(getString(R.string.refresh_token), refreshToken);
-                    editor.commit();
-                    return true;
-                } else {
-                    System.out.println(response.errorBody());
-                    return false;
-                }
-            } catch (IOException e) {
-                Log.e(LOG_TAG, e.getMessage());
-                return false;
-            }
+            return new AuthenticationService(getApplicationContext()).login(loginData);
         }
 
         @Override

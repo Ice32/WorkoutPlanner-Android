@@ -4,32 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-import com.workoutplanner.api.ApiResponse;
-import com.workoutplanner.api.LoginSubmissionData;
-import com.workoutplanner.api.interfaces.UsersAPI;
 import com.workoutplanner.model.User;
-import com.workoutplanner.service.JwtTokenProvider;
-import com.workoutplanner.service.ServiceGenerator;
-
-import java.io.IOException;
-
-import retrofit2.Call;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.workoutplanner.service.AuthenticationService;
 
 public class RegistrationActivity extends AppCompatActivity {
     private final String LOG_TAG = this.getClass().getSimpleName();
@@ -42,8 +27,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mRegistrationFormView;
-
-    private UsersAPI usersAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +46,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mRegistrationFormView = findViewById(R.id.registration_form);
         mProgressView = findViewById(R.id.registration_progress);
-        usersAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(UsersAPI.class);
     }
 
 
@@ -181,35 +163,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             User user = new User(mEmail, fullName, mPassword);
 
-            Call<ApiResponse<Void>> registrationRequest = usersAPI.registerUser(user);
-            try {
-                Response<ApiResponse<Void>> response = registrationRequest.execute();
-                if(response.isSuccessful()) {
-                    Call<Void> loginRequest = usersAPI.loginUser(new LoginSubmissionData(mEmail, mPassword));
-                    Response<Void> loginResponse = loginRequest.execute();
-                    String refreshToken = response.headers().get("RefreshToken");
-                    String token = loginResponse.headers().get("Authorization");
-
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString(getString(R.string.jwt_token), token);
-                    editor.putString(getString(R.string.refresh_token), refreshToken);
-                    editor.commit();
-                    return null;
-                } else {
-                    System.out.println(response.errorBody());
-                    Gson gson = new Gson();
-                    String responseDataString = response.errorBody().string();
-                    ApiResponse<Void> responseData = gson.fromJson(responseDataString, ApiResponse.class);
-                    if (responseData.getError().equals(ApiErrors.DUPLICATE_EMAIL)) {
-                        return "Email already in use";
-                    }
-                    return "Unknown error";
-                }
-            } catch (IOException e) {
-                Log.e(LOG_TAG, e.getMessage());
-                return "Unknown error";
-            }
+            return new AuthenticationService(getApplicationContext()).registerUser(user);
         }
 
         @Override
