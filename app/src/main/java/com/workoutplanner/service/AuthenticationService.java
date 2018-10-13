@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.workoutplanner.ApiErrors;
+import com.workoutplanner.api.ApiErrors;
 import com.workoutplanner.R;
 import com.workoutplanner.api.ApiResponse;
 import com.workoutplanner.api.LoginSubmissionData;

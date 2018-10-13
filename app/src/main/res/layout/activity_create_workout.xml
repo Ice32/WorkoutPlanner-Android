@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/top_level_side_padding"
     android:paddingRight="@dimen/top_level_side_padding"
-    tools:context=".CreateWorkoutActivity">
+    tools:context=".view.createdWorkouts.CreateWorkoutActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/workoutNameWrapper"
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/selectableExerciseList"
-        android:name="com.workoutplanner.existingExercises.SelectableExerciseFragment"
+        android:name="com.workoutplanner.view.exercises.SelectableExerciseFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/exercisesSubHeader"/>

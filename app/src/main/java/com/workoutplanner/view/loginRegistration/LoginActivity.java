@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.loginRegistration;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,8 +17,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.workoutplanner.R;
 import com.workoutplanner.api.LoginSubmissionData;
 import com.workoutplanner.service.AuthenticationService;
+import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 
 /**
  * A login screen that offers login via email/password.

@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.loginRegistration;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -13,8 +13,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.workoutplanner.R;
 import com.workoutplanner.model.User;
 import com.workoutplanner.service.AuthenticationService;
+import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
     private final String LOG_TAG = this.getClass().getSimpleName();

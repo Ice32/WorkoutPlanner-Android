@@ -1,4 +1,4 @@
-package com.workoutplanner.existingExercises;
+package com.workoutplanner.view.exercises;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.workoutplanner.R;
-import com.workoutplanner.existingExercises.SelectableExerciseFragment.OnListFragmentInteractionListener;
+import com.workoutplanner.view.exercises.SelectableExerciseFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.Exercise;
 
 import java.util.List;

@@ -1,13 +1,13 @@
-package com.workoutplanner;
+package com.workoutplanner.view.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.workoutplanner.WorkoutsListFragment.OnListFragmentInteractionListener;
+import com.workoutplanner.R;
+import com.workoutplanner.view.common.WorkoutsListFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.Workout;
 
 import java.util.List;

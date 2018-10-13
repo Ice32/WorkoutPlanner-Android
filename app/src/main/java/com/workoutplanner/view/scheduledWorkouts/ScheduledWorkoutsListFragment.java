@@ -1,4 +1,4 @@
-package com.workoutplanner.existingExercises;
+package com.workoutplanner.view.scheduledWorkouts;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.workoutplanner.R;
-import com.workoutplanner.api.interfaces.ExercisesAPI;
-import com.workoutplanner.model.Exercise;
+import com.workoutplanner.api.interfaces.WorkoutsAPI;
+import com.workoutplanner.model.ScheduledWorkout;
 import com.workoutplanner.service.JwtTokenProvider;
 import com.workoutplanner.service.ServiceGenerator;
 
@@ -24,69 +24,67 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 /**
  * A fragment representing a list of Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class SelectableExerciseFragment extends Fragment {
+public class ScheduledWorkoutsListFragment extends Fragment {
     private final String LOG_TAG = this.getClass().getSimpleName();
-
     private OnListFragmentInteractionListener mListener;
-    private ExercisesAPI exercisesAPI;
+    private WorkoutsAPI workoutsAPI;
     private RecyclerView view;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public SelectableExerciseFragment() {
+    public ScheduledWorkoutsListFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static SelectableExerciseFragment newInstance() {
-        return new SelectableExerciseFragment();
+    public static ScheduledWorkoutsListFragment newInstance(int columnCount) {
+        return new ScheduledWorkoutsListFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        exercisesAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(ExercisesAPI.class);
+        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(WorkoutsAPI.class);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.fragment_selectableexercise_list, container, false);
-
+        view = (RecyclerView) inflater.inflate(R.layout.scheduled_workouts_fragment_item_list, container, false);
         // Set the adapter
-        view.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        view.setAdapter(new SelectableExerciseViewAdapter(new ArrayList<Exercise>(), mListener));
+        Context context = view.getContext();
+        view.setLayoutManager(new LinearLayoutManager(context));
+        view.setAdapter(new ScheduledWorkoutsViewAdapter(
+                new ArrayList<ScheduledWorkout>(),
+                mListener
+        ));
         loadData();
         return view;
     }
 
     private void loadData() {
-        Call<List<Exercise>> exercisesRequest = exercisesAPI.getAllCreatedExercises();
-        exercisesRequest.enqueue(new Callback<List<Exercise>>() {
+        Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getScheduledWorkouts();
+        workoutsRequest.enqueue(new Callback<List<ScheduledWorkout>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Exercise>> call, @NonNull Response<List<Exercise>> response) {
+            public void onResponse(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Response<List<ScheduledWorkout>> response) {
                 if(response.isSuccessful()) {
-                    view.setAdapter(new SelectableExerciseViewAdapter(
-                            response.body(),
+                    List<ScheduledWorkout> workouts = response.body();
+                    view.setAdapter(new ScheduledWorkoutsViewAdapter(
+                            workouts,
                             mListener
                     ));
                 } else {
-                    if (response.errorBody() != null) {
-                        Log.e(LOG_TAG, response.errorBody().toString());
-                    }
+                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Exercise>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<ScheduledWorkout>> call, Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
             }
         });
@@ -110,13 +108,8 @@ public class SelectableExerciseFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
     public interface OnListFragmentInteractionListener {
-        void onListFragmentInteraction(Exercise item, boolean selected);
+        void onListFragmentInteraction(ScheduledWorkout item);
+        void onButtonClick(ScheduledWorkout item);
     }
 }

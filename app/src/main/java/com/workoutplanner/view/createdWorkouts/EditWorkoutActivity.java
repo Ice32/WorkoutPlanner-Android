@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.createdWorkouts;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -8,7 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.workoutplanner.existingExercises.SelectableExerciseFragment;
+import com.workoutplanner.R;
+import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 

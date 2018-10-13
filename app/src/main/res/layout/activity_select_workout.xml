@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".CreatedWorkoutsActivity"
+    tools:context=".view.createdWorkouts.CreatedWorkoutsActivity"
     tools:showIn="@layout/app_bar_home">
 
     <fragment
         android:id="@+id/homeWorkoutsFragment"
-        android:name="com.workoutplanner.WorkoutsListFragment"
+        android:name="com.workoutplanner.view.common.WorkoutsListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"/>

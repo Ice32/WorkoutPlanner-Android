@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateNewExerciseActivity"
+    tools:context=".view.exercises.CreateNewExerciseActivity"
     android:paddingTop="15dp"
     android:paddingLeft="@dimen/top_level_side_padding"
     android:paddingRight="@dimen/top_level_side_padding">

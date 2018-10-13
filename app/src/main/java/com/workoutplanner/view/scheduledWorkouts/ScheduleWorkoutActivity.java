@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.scheduledWorkouts;
 
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.workoutplanner.R;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.common;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.workoutplanner.R;
 import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.JwtTokenProvider;

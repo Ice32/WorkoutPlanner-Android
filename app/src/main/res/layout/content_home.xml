@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".HomeActivity"
+    tools:context=".view.scheduledWorkouts.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
     <fragment
         android:id="@+id/homeScheduledWorkoutsFragment"
-        android:name="com.workoutplanner.ScheduledWorkoutsListFragment"
+        android:name="com.workoutplanner.view.scheduledWorkouts.ScheduledWorkoutsListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

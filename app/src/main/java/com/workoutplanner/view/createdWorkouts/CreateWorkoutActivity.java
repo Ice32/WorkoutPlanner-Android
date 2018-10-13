@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.createdWorkouts;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,11 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
 
+import com.workoutplanner.R;
 import com.workoutplanner.api.interfaces.WorkoutsAPI;
-import com.workoutplanner.existingExercises.SelectableExerciseFragment;
+import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.JwtTokenProvider;

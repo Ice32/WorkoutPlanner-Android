@@ -1,4 +1,4 @@
-package com.workoutplanner.history;
+package com.workoutplanner.view.statistics;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.workoutplanner.R;
-import com.workoutplanner.history.DoneWorkoutsListFragment.OnListFragmentInteractionListener;
+import com.workoutplanner.view.statistics.DoneWorkoutsListFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.ScheduledWorkout;
 
 import java.text.SimpleDateFormat;

@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.scheduledWorkouts;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.workoutplanner.ScheduledWorkoutsListFragment.OnListFragmentInteractionListener;
+import com.workoutplanner.R;
+import com.workoutplanner.view.scheduledWorkouts.ScheduledWorkoutsListFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.ScheduledWorkout;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 

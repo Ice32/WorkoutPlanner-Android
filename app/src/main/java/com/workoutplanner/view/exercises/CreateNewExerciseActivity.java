@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.exercises;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.workoutplanner.R;
 import com.workoutplanner.api.interfaces.ExercisesAPI;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.service.JwtTokenProvider;

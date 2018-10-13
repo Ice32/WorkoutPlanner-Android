@@ -1,4 +1,4 @@
-package com.workoutplanner;
+package com.workoutplanner.view.createdWorkouts;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,9 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.workoutplanner.view.exercises.ExercisesActivity;
+import com.workoutplanner.R;
+import com.workoutplanner.view.common.WorkoutsListFragment;
 import com.workoutplanner.model.Workout;
+import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
+import com.workoutplanner.view.statistics.WorkoutStatisticsActivity;
 
-public class SelectWorkoutActivity extends AppCompatActivity implements
+public class CreatedWorkoutsActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener,
         WorkoutsListFragment.OnListFragmentInteractionListener {
 
@@ -23,13 +28,35 @@ public class SelectWorkoutActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_workout);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.created_workouts_container);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        btnCreateWorkout = findViewById(R.id.btnCreateWorkout);
+
+
+        btnCreateWorkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
     public void onListFragmentInteraction(Workout item) {
-        Intent intent = new Intent(getApplicationContext(), ScheduleWorkoutActivity.class);
+        Intent intent = new Intent(getApplicationContext(), EditWorkoutActivity.class);
         startActivity(intent);
     }
 

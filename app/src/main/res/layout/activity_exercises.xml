@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExercisesActivity"
+    tools:context=".view.exercises.ExercisesActivity"
     android:paddingTop="60dp">
 
     <fragment
         android:id="@+id/existingExercisesFragment"
-        android:name="com.workoutplanner.existingExercises.ExistingExerciseListFragment"
+        android:name="com.workoutplanner.view.exercises.ExistingExerciseListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"/>
