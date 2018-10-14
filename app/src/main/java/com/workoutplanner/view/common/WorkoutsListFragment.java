@@ -6,29 +6,19 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.workoutplanner.R;
-import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.Workout;
-import com.workoutplanner.service.JwtTokenProvider;
-import com.workoutplanner.service.ServiceGenerator;
+import com.workoutplanner.service.WorkoutsService;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 
 public class WorkoutsListFragment extends Fragment {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-    private WorkoutsAPI workoutsAPI;
     private OnListFragmentInteractionListener mListener;
     private RecyclerView view;
 
@@ -43,7 +33,6 @@ public class WorkoutsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(WorkoutsAPI.class);
     }
 
     @Override
@@ -61,8 +50,8 @@ public class WorkoutsListFragment extends Fragment {
         Context context = view.getContext();
         view.setLayoutManager(new LinearLayoutManager(context));
         view.setAdapter(new WorkoutsViewAdapter(
-            new ArrayList<Workout>(),
-            mListener
+                new ArrayList<Workout>(),
+                mListener
         ));
 
         loadData();
@@ -70,26 +59,10 @@ public class WorkoutsListFragment extends Fragment {
     }
 
     private void loadData() {
-        Call<List<Workout>> workoutsRequest = workoutsAPI.getCreatedWorkouts();
-        workoutsRequest.enqueue(new Callback<List<Workout>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Workout>> call, @NonNull Response<List<Workout>> response) {
-                if(response.isSuccessful()) {
-                    List<Workout> workouts = response.body();
-                    view.setAdapter(new WorkoutsViewAdapter(
-                            workouts,
-                            mListener
-                    ));
-                } else {
-                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Workout>> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, t.getMessage());
-            }
-        });
+        new WorkoutsService().getCreatedWorkouts(workouts -> view.setAdapter(new WorkoutsViewAdapter(
+                workouts,
+                mListener
+        )));
     }
 
 

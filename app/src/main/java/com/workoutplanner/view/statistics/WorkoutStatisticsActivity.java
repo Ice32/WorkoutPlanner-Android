@@ -67,12 +67,9 @@ public class WorkoutStatisticsActivity extends AppCompatActivity implements Done
         chart.invalidate();
 
         Button btnOpenDoneWorkouts = findViewById(R.id.btnViewDoneWorkouts);
-        btnOpenDoneWorkouts.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
-                startActivity(intent);
-            }
+        btnOpenDoneWorkouts.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
+            startActivity(intent);
         });
     }
 

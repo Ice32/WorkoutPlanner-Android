@@ -2,6 +2,7 @@ package com.workoutplanner.view.createdWorkouts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -35,12 +36,9 @@ public class CreatedWorkoutsActivity extends AppCompatActivity implements
         btnCreateWorkout = findViewById(R.id.btnCreateWorkout);
 
 
-        btnCreateWorkout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
-                startActivity(intent);
-            }
+        btnCreateWorkout.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CreateWorkoutActivity.class);
+            startActivity(intent);
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -61,7 +59,7 @@ public class CreatedWorkoutsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

@@ -35,12 +35,9 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SelectWorkoutActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SelectWorkoutActivity.class);
+            startActivity(intent);
         });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -68,7 +65,7 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.created_exercises) {
             intent = new Intent(getApplicationContext(), ExercisesActivity.class);
         } else if (id == R.id.nav_logout) {
-            new AuthenticationService(this).logout();
+            new AuthenticationService().logout();
             intent = new Intent(getApplicationContext(), LoginActivity.class);
         }
         if (intent != null) {

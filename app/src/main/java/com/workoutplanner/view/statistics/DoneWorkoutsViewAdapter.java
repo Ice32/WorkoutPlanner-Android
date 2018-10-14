@@ -1,5 +1,6 @@
 package com.workoutplanner.view.statistics;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,6 @@ import com.workoutplanner.model.ScheduledWorkout;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsViewAdapter.ViewHolder> {
 
     private final List<ScheduledWorkout> mValues;
@@ -31,14 +27,14 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.done_workout_fragment_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).workout.name);
         holder.mScheduledDateView.setText(
@@ -48,14 +44,11 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
                 simpleTimeFormat.format(mValues.get(position).time)
         );
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+        holder.mView.setOnClickListener(v -> {
+            if (null != mListener) {
+                // Notify the active callbacks interface (the activity, if the
+                // fragment is attached to one) that an item has been selected.
+                mListener.onListFragmentInteraction(holder.mItem);
             }
         });
     }
@@ -79,10 +72,5 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
             mScheduledDateView = view.findViewById(R.id.doneWorkoutsSubHeader);
             mScheduledTimeView = view.findViewById(R.id.doneWorkoutsSubHeader2);;
         }
-
-//        @Override
-//        public String toString() {
-//            return super.toString() + " '" + mNameView.getText() + "'";
-//        }
     }
 }

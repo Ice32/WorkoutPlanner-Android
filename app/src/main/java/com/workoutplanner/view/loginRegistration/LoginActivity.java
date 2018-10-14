@@ -26,8 +26,6 @@ import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends Activity {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -55,26 +53,17 @@ public class LoginActivity extends Activity {
         TextView createAccountText = findViewById(R.id.noAccountPartTwo);
 
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });
-        createAccountText.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
-                startActivity(intent);
-            }
+        mEmailSignInButton.setOnClickListener(view -> attemptLogin());
+        createAccountText.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+            startActivity(intent);
         });
 
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-        String jwtToken = new AuthenticationService(this).getAuthToken();
+        String jwtToken = new AuthenticationService().getAuthToken();
         if (jwtToken != null) {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
@@ -227,7 +216,7 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             LoginSubmissionData loginData = new LoginSubmissionData(mEmail, mPassword);
-            return new AuthenticationService(getApplicationContext()).login(loginData);
+            return new AuthenticationService().login(loginData);
         }
 
         @Override

@@ -6,23 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.workoutplanner.R;
-import com.workoutplanner.api.interfaces.WorkoutsAPI;
 import com.workoutplanner.model.ScheduledWorkout;
-import com.workoutplanner.service.JwtTokenProvider;
-import com.workoutplanner.service.ServiceGenerator;
+import com.workoutplanner.service.ScheduledWorkoutsService;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -32,9 +24,7 @@ import retrofit2.Response;
  * interface.
  */
 public class ScheduledWorkoutsListFragment extends Fragment {
-    private final String LOG_TAG = this.getClass().getSimpleName();
     private OnListFragmentInteractionListener mListener;
-    private WorkoutsAPI workoutsAPI;
     private RecyclerView view;
 
     public ScheduledWorkoutsListFragment() {
@@ -48,8 +38,6 @@ public class ScheduledWorkoutsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(WorkoutsAPI.class);
     }
 
     @Override
@@ -68,26 +56,10 @@ public class ScheduledWorkoutsListFragment extends Fragment {
     }
 
     private void loadData() {
-        Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getScheduledWorkouts();
-        workoutsRequest.enqueue(new Callback<List<ScheduledWorkout>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Response<List<ScheduledWorkout>> response) {
-                if(response.isSuccessful()) {
-                    List<ScheduledWorkout> workouts = response.body();
-                    view.setAdapter(new ScheduledWorkoutsViewAdapter(
-                            workouts,
-                            mListener
-                    ));
-                } else {
-                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<ScheduledWorkout>> call, Throwable t) {
-                Log.e(LOG_TAG, t.getMessage());
-            }
-        });
+        new ScheduledWorkoutsService().getSheduledWorkouts(scheduledWorkouts -> view.setAdapter(new ScheduledWorkoutsViewAdapter(
+                scheduledWorkouts,
+                mListener
+        )));
     }
 
 

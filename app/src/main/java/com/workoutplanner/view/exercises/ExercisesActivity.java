@@ -28,12 +28,9 @@ public class ExercisesActivity extends AppCompatActivity implements NavigationVi
 
         btnAddExercise = findViewById(R.id.btnAddExercise);
 
-        btnAddExercise.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateNewExerciseActivity.class);
-                startActivity(intent);
-            }
+        btnAddExercise.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), CreateNewExerciseActivity.class);
+            startActivity(intent);
         });
 
         Toolbar toolbar = findViewById(R.id.toolbar);

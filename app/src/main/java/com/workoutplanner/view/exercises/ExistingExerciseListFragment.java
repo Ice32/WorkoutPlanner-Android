@@ -6,23 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.workoutplanner.R;
-import com.workoutplanner.api.interfaces.ExercisesAPI;
 import com.workoutplanner.model.Exercise;
-import com.workoutplanner.service.ServiceGenerator;
-import com.workoutplanner.service.JwtTokenProvider;
+import com.workoutplanner.service.ExercisesService;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -32,9 +24,6 @@ import retrofit2.Response;
  * interface.
  */
 public class ExistingExerciseListFragment extends Fragment {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-    private ExercisesAPI exercisesAPI;
-
     private OnListFragmentInteractionListener mListener;
     private RecyclerView view;
 
@@ -49,7 +38,6 @@ public class ExistingExerciseListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        exercisesAPI = new ServiceGenerator(new JwtTokenProvider(getActivity())).createService(ExercisesAPI.class);
     }
 
     @Override
@@ -73,27 +61,10 @@ public class ExistingExerciseListFragment extends Fragment {
     }
 
     private void loadExercises() {
-        Call<List<Exercise>> exercisesRequest = exercisesAPI.getAllCreatedExercises();
-        exercisesRequest.enqueue(new Callback<List<Exercise>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Exercise>> call, @NonNull Response<List<Exercise>> response) {
-                if(response.isSuccessful()) {
-                    view.setAdapter(new ExistingExerciseViewAdapter(
-                            response.body(),
-                            mListener
-                    ));
-                } else {
-                    if (response.errorBody() != null) {
-                        Log.e(LOG_TAG, String.valueOf(response.errorBody()));
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Exercise>> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, t.getMessage());
-            }
-        });
+        new ExercisesService().findExercises(exercises -> view.setAdapter(new ExistingExerciseViewAdapter(
+                exercises,
+                mListener
+        )));
     }
 
 

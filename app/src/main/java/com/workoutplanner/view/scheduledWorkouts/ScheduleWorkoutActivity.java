@@ -33,13 +33,10 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
 
         txtExactDate = findViewById(R.id.txtExactDate);
 
-        txtExactDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog =
-                        new DatePickerDialog(ScheduleWorkoutActivity.this, ScheduleWorkoutActivity.this, 2018, 6, 4);
-                datePickerDialog.show();
-            }
+        txtExactDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog =
+                    new DatePickerDialog(ScheduleWorkoutActivity.this, ScheduleWorkoutActivity.this, 2018, 6, 4);
+            datePickerDialog.show();
         });
 
         spinnerWorkoutDay.setAdapter(adapter);
@@ -82,10 +79,5 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
         return Arrays.asList(days);
     }
 
-    private View.OnClickListener backToHome = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            finish();
-        }
-    };
+    private View.OnClickListener backToHome = v -> finish();
 }

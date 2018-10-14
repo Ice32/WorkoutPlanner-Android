@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.workoutplanner.MyApplication;
 import com.workoutplanner.api.ApiErrors;
 import com.workoutplanner.R;
 import com.workoutplanner.api.ApiResponse;
@@ -26,8 +27,8 @@ public class AuthenticationService {
     private String JWT_TOKEN_KEY;
     private String REFRESH_TOKEN_KEY;
 
-    public AuthenticationService(Context context) {
-        this.context = context;
+    public AuthenticationService() {
+        this.context = MyApplication.getAppContext();
         usersAPI = new ServiceGenerator(new JwtTokenProvider(context)).createService(UsersAPI.class);
         JWT_TOKEN_KEY = context.getString(R.string.jwt_token);
         REFRESH_TOKEN_KEY = context.getString(R.string.refresh_token);

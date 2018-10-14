@@ -9,13 +9,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.workoutplanner.R;
+import com.workoutplanner.service.WorkoutsService;
 import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 
 public class EditWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
-
-//    private WorkoutsAPI workoutsAPI = new MockWorkoutsAPI();
 
     EditText txtWorkoutName;
 
@@ -42,10 +41,7 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
         String name = txtWorkoutName.getText().toString();
 
         Workout w = new Workout(name);
-
-//        workoutsAPI.addWorkout(w);
-
-        finish();
+        new WorkoutsService().saveWorkout(w, this::finish);
     }
 
     @Override

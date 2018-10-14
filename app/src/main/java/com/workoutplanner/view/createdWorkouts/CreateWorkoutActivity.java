@@ -1,34 +1,23 @@
 package com.workoutplanner.view.createdWorkouts;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.workoutplanner.R;
-import com.workoutplanner.api.interfaces.WorkoutsAPI;
-import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
-import com.workoutplanner.service.JwtTokenProvider;
-import com.workoutplanner.service.ServiceGenerator;
+import com.workoutplanner.service.WorkoutsService;
+import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class CreateWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-
-    private WorkoutsAPI workoutsAPI;
     private List<Exercise> selectedExercises = new ArrayList<>();
 
     EditText txtWorkoutName;
@@ -44,8 +33,6 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
         showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
-
-        workoutsAPI = new ServiceGenerator(new JwtTokenProvider(this)).createService(WorkoutsAPI.class);
     }
 
     private void showActionBar() {
@@ -58,24 +45,7 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
         String name = txtWorkoutName.getText().toString();
 
         Workout w = new Workout(name, selectedExercises);
-
-        Call<Workout> workoutRequest = workoutsAPI.createWorkout(w);
-        workoutRequest.enqueue(new Callback<Workout>() {
-            @Override
-            public void onResponse(@NonNull Call<Workout> call, @NonNull Response<Workout> response) {
-                if(!response.isSuccessful()) {
-                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
-                }
-                finish();
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Workout> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, t.getMessage());
-                finish();
-            }
-        });
-
+        new WorkoutsService().saveWorkout(w, this::finish);
     }
 
     @Override

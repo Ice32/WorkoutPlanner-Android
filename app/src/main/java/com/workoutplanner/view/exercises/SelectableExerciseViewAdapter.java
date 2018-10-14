@@ -41,12 +41,7 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
         String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
         holder.selectableExerciseSubHeader.setText(setsReps);
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mListener.onListFragmentInteraction(holder.mItem, isChecked);
-            }
-        });
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> mListener.onListFragmentInteraction(holder.mItem, isChecked));
     }
 
     @Override

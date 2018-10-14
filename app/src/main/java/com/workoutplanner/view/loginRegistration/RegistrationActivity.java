@@ -19,8 +19,6 @@ import com.workoutplanner.service.AuthenticationService;
 import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private final String LOG_TAG = this.getClass().getSimpleName();
-
     private RegistrationActivity.UserRegistrationTask mAuthTask = null;
 
     // UI references.
@@ -39,12 +37,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mPasswordView = findViewById(R.id.password);
 
         Button mEmailRegistrationButton = findViewById(R.id.email_registration_button);
-        mEmailRegistrationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptRegistration();
-            }
-        });
+        mEmailRegistrationButton.setOnClickListener(view -> attemptRegistration());
 
         mRegistrationFormView = findViewById(R.id.registration_form);
         mProgressView = findViewById(R.id.registration_progress);
@@ -165,7 +158,7 @@ public class RegistrationActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             User user = new User(mEmail, fullName, mPassword);
 
-            return new AuthenticationService(getApplicationContext()).registerUser(user);
+            return new AuthenticationService().registerUser(user);
         }
 
         @Override
