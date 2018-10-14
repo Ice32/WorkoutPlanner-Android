@@ -1,32 +1,25 @@
 package com.workoutplanner.view.statistics;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.workoutplanner.view.createdWorkouts.CreatedWorkoutsActivity;
-import com.workoutplanner.view.exercises.ExercisesActivity;
 import com.workoutplanner.R;
 import com.workoutplanner.model.ScheduledWorkout;
-import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
+import com.workoutplanner.view.common.BaseNavigationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkoutStatisticsActivity extends AppCompatActivity implements DoneWorkoutsListFragment.OnListFragmentInteractionListener,
-        NavigationView.OnNavigationItemSelectedListener {
+public class WorkoutStatisticsActivity extends BaseNavigationActivity implements DoneWorkoutsListFragment.OnListFragmentInteractionListener {
 
 
     @Override
@@ -75,27 +68,5 @@ public class WorkoutStatisticsActivity extends AppCompatActivity implements Done
     @Override
     public void onListFragmentInteraction(ScheduledWorkout item) {
 
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        Intent intent = null;
-        if (id == R.id.created_workouts) {
-            intent = new Intent(getApplicationContext(), CreatedWorkoutsActivity.class);
-        } else if (id == R.id.nav_scheduled) {
-            intent = new Intent(getApplicationContext(), HomeActivity.class);
-        } else if (id == R.id.created_exercises) {
-            intent = new Intent(getApplicationContext(), ExercisesActivity.class);
-        }
-        if (intent != null) {
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
