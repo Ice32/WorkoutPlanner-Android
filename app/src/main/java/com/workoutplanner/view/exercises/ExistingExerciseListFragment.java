@@ -49,7 +49,7 @@ public class ExistingExerciseListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.exercises_existing_exercises_fragment_item_list, container, false);
+        view = (RecyclerView) inflater.inflate(R.layout.exercises_list, container, false);
         // Set the adapter
         view.setLayoutManager(new LinearLayoutManager(view.getContext()));
         view.setAdapter(new ExistingExerciseViewAdapter(

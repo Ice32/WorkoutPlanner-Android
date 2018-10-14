@@ -28,7 +28,7 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.exercises_fragment_selectableexercise, parent, false);
+                .inflate(R.layout.exercises_selectable_exercise_item, parent, false);
         return new ViewHolder(view);
     }
 

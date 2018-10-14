@@ -22,7 +22,7 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scheduledworkouts_activity_schedule_workout);
+        setContentView(R.layout.scheduledworkouts_schedule_workout_activity);
 
         Spinner spinnerWorkoutDay = findViewById(R.id.spinnerWorkoutDay);
         spinnerWorkoutDay.setVisibility(View.INVISIBLE);

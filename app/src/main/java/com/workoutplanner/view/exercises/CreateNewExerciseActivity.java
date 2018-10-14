@@ -19,7 +19,7 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.exercises_activity_create_new_exercise);
+        setContentView(R.layout.exercises_create_new_activity);
 
         txtExerciseName = findViewById(R.id.txtExerciseName);
         txtNumSets = findViewById(R.id.txtNumSets);

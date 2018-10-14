@@ -25,7 +25,7 @@ public class SelectWorkoutActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.workouts_activity_select_workout);
+        setContentView(R.layout.scheduledworkouts_select_workout_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

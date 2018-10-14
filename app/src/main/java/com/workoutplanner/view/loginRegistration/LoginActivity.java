@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
 
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.loginregistration_activity_login);
+        setContentView(R.layout.loginregistration_login_activity);
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);

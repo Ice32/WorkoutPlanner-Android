@@ -21,7 +21,7 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.workouts_activity_edit_workout);
+        setContentView(R.layout.workouts_edit_workout_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

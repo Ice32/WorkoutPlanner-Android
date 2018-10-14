@@ -46,7 +46,7 @@ public class SelectableExerciseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.exercises_fragment_selectableexercise_list, container, false);
+        view = (RecyclerView) inflater.inflate(R.layout.exercises_selectable_exercise_list, container, false);
 
         // Set the adapter
         view.setLayoutManager(new LinearLayoutManager(view.getContext()));
