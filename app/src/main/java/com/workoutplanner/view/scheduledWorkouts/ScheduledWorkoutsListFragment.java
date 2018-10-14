@@ -43,7 +43,7 @@ public class ScheduledWorkoutsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.scheduled_workouts_fragment_item_list, container, false);
+        view = (RecyclerView) inflater.inflate(R.layout.scheduledworkouts_fragment_item_list, container, false);
         // Set the adapter
         Context context = view.getContext();
         view.setLayoutManager(new LinearLayoutManager(context));

@@ -23,7 +23,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity implements DoneWor
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.done_workouts_container);
+        setContentView(R.layout.statistics_done_workouts_container);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

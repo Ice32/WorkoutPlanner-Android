@@ -2,12 +2,12 @@
 <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/selectableExerciseList"
-    android:name="com.workoutplanner.existingExercises.SelectableExerciseFragment"
+    android:id="@+id/list"
+    android:name="com.workoutplanner.WorkoutsListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".view.exercises.SelectableExerciseFragment"
-    tools:listitem="@layout/fragment_selectableexercise" />
+    tools:context=".view.common.WorkoutsListFragment"
+    tools:listitem="@layout/workouts_fragment_item" />

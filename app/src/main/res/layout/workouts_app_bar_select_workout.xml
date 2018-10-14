@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".view.statistics.WorkoutHistoryActivity">
 
-    <include layout="@layout/activity_select_workout" />
+    <include layout="@layout/workouts_activity_select_workout" />
 </android.support.design.widget.CoordinatorLayout>

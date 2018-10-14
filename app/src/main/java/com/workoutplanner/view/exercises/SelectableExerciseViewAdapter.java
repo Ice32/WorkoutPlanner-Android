@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.workoutplanner.R;
@@ -29,7 +28,7 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_selectableexercise, parent, false);
+                .inflate(R.layout.exercises_fragment_selectableexercise, parent, false);
         return new ViewHolder(view);
     }
 

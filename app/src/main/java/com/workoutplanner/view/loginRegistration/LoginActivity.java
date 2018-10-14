@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -42,7 +41,7 @@ public class LoginActivity extends Activity {
 
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.loginregistration_activity_login);
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);

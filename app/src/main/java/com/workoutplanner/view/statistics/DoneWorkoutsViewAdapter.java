@@ -29,7 +29,7 @@ public class DoneWorkoutsViewAdapter extends RecyclerView.Adapter<DoneWorkoutsVi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.done_workout_fragment_item, parent, false);
+                .inflate(R.layout.workouts_done_workout_fragment_item, parent, false);
         return new ViewHolder(view);
     }
 

@@ -35,7 +35,7 @@ public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<Scheduled
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.scheduled_workouts_fragment_item, parent, false);
+                .inflate(R.layout.scheduledworkouts_fragment_item, parent, false);
         return new ViewHolder(view);
     }
 
