@@ -1,4 +1,4 @@
-package com.workoutplanner.view.createdWorkouts;
+package com.workoutplanner.view.workouts;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -9,19 +9,23 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.workoutplanner.R;
-import com.workoutplanner.service.WorkoutsService;
-import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
+import com.workoutplanner.service.WorkoutsService;
+import com.workoutplanner.view.exercises.SelectableExerciseFragment;
 
-public class EditWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CreateWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
+    private List<Exercise> selectedExercises = new ArrayList<>();
 
     EditText txtWorkoutName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.workouts_edit_workout_activity);
+        setContentView(R.layout.workouts_create_workout_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -40,7 +44,7 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     private void saveWorkout() {
         String name = txtWorkoutName.getText().toString();
 
-        Workout w = new Workout(name);
+        Workout w = new Workout(name, selectedExercises);
         new WorkoutsService().saveWorkout(w, this::finish);
     }
 
@@ -68,7 +72,11 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     }
 
     @Override
-    public void onListFragmentInteraction(Exercise item, boolean isSelected) {
-
+    public void onListFragmentInteraction(Exercise item, boolean isChecked) {
+        if (isChecked) {
+            selectedExercises.add(item);
+        } else {
+            selectedExercises.remove(item);
+        }
     }
 }

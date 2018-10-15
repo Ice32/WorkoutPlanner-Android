@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".view.createdWorkouts.CreatedWorkoutsActivity"
+    tools:context=".view.workouts.CreatedWorkoutsActivity"
     tools:showIn="@layout/scheduledworkouts_app_bar">
 
     <fragment

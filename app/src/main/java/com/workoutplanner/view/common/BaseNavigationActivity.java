@@ -10,7 +10,7 @@ import android.view.MenuItem;
 
 import com.workoutplanner.R;
 import com.workoutplanner.service.AuthenticationService;
-import com.workoutplanner.view.createdWorkouts.CreatedWorkoutsActivity;
+import com.workoutplanner.view.workouts.CreatedWorkoutsActivity;
 import com.workoutplanner.view.exercises.ExercisesActivity;
 import com.workoutplanner.view.loginRegistration.LoginActivity;
 import com.workoutplanner.view.scheduledWorkouts.HomeActivity;

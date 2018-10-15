@@ -33,11 +33,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".view.createdWorkouts.CreateWorkoutActivity"
+            android:name=".view.workouts.CreateWorkoutActivity"
             android:label="Create a workout" />
         <activity android:name=".view.exercises.CreateNewExerciseActivity" android:label="Create new exercise" />
         <activity
-            android:name=".view.createdWorkouts.EditWorkoutActivity"
+            android:name=".view.workouts.EditWorkoutActivity"
             android:label="Update workout" />
         <activity
             android:name=".view.loginRegistration.RegistrationActivity"
@@ -54,7 +54,7 @@
             android:label="Done workouts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.createdWorkouts.CreatedWorkoutsActivity"
+            android:name=".view.workouts.CreatedWorkoutsActivity"
             android:label="Created workouts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

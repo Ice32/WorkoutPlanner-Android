@@ -1,4 +1,4 @@
-package com.workoutplanner.view.createdWorkouts;
+package com.workoutplanner.view.workouts;
 
 import android.content.Intent;
 import android.os.Bundle;
