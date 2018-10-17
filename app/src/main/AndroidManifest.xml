@@ -34,8 +34,11 @@
         </activity>
         <activity
             android:name=".view.workouts.CreateWorkoutActivity"
-            android:label="Create a workout" />
-        <activity android:name=".view.exercises.CreateNewExerciseActivity" android:label="Create new exercise" />
+            android:label="Create a workout"
+            android:parentActivityName="com.workoutplanner.view.workouts.CreatedWorkoutsActivity"/>
+        <activity
+            android:name=".view.exercises.CreateNewExerciseActivity"
+            android:label="Create new exercise" />
         <activity
             android:name=".view.workouts.EditWorkoutActivity"
             android:label="Update workout" />
@@ -44,7 +47,8 @@
             android:label="Sign up" />
         <activity
             android:name=".view.scheduledWorkouts.ScheduleWorkoutActivity"
-            android:label="Schedule workout" />
+            android:label="Schedule workout"
+            android:parentActivityName="com.workoutplanner.view.scheduledWorkouts.SelectWorkoutActivity"/>
         <activity
             android:name=".view.statistics.WorkoutStatisticsActivity"
             android:label="Statistics"
@@ -59,7 +63,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.scheduledWorkouts.SelectWorkoutActivity"
-            android:label="Select workout" />
+            android:label="Select workout"
+            android:parentActivityName="com.workoutplanner.view.scheduledWorkouts.HomeActivity"/>
         <activity
             android:name=".view.exercises.ExercisesActivity"
             android:label="Exercises"

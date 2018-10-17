@@ -1,6 +1,8 @@
 package com.workoutplanner.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     public Integer id;
     public String fullName;
     public String email;

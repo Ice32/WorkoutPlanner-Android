@@ -1,6 +1,8 @@
 package com.workoutplanner.model;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     public int id;
     public String name;
     public int sets;

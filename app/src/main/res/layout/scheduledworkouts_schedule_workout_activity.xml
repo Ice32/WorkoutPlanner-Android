@@ -22,6 +22,7 @@
             android:tint="@color/primary_text"
             android:layout_gravity="center_vertical"/>
         <TextView
+            android:id="@+id/selectedWorkoutToSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/schedule_text_size"
@@ -58,6 +59,7 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
         <TextView
+            android:id="@+id/txtExactTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

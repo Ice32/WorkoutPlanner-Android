@@ -53,6 +53,7 @@ public class CreateNewExerciseActivity extends AppCompatActivity{
                 && assertViewValueNotEmpty(txtNumReps)
                 && assertViewValueNotEmpty(txtExerciseName);
     }
+
     boolean assertViewValueNotEmpty(EditText view) {
        if (view.getText().toString().equals("")) {
            view.setError("Required field");

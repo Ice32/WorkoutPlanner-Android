@@ -20,6 +20,9 @@ public interface WorkoutsAPI {
     @GET("/scheduled_workouts")
     Call<List<ScheduledWorkout>> getScheduledWorkouts();
 
+    @POST("/scheduled_workouts")
+    Call<Void> scheduleWorkout(@Body ScheduledWorkout scheduledWorkout);
+
     @GET("/scheduled_workouts/done")
     Call<List<ScheduledWorkout>> getDoneScheduledWorkouts();
 }

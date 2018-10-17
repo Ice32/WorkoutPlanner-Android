@@ -64,4 +64,24 @@ public class ScheduledWorkoutsService {
             }
         });
     }
+
+    public void scheduleWorkout(ScheduledWorkout scheduledWorkout, Runnable callback) {
+        Call<Void> workoutsRequest = workoutsAPI.scheduleWorkout(scheduledWorkout);
+
+        workoutsRequest.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if(response.isSuccessful()) {
+                    callback.run();
+                } else {
+                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e(LOG_TAG, t.getMessage());
+            }
+        });
+    }
 }

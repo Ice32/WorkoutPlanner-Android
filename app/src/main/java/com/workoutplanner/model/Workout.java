@@ -1,8 +1,9 @@
 package com.workoutplanner.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Workout {
+public class Workout implements Serializable {
     public Workout(String name) {
         this.name = name;
     }

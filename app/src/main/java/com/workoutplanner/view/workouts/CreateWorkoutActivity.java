@@ -42,10 +42,26 @@ public class CreateWorkoutActivity extends AppCompatActivity implements Selectab
     }
 
     private void saveWorkout() {
+        if (!validateFieldsForWorkoutSave()) {
+            return;
+        }
         String name = txtWorkoutName.getText().toString();
 
         Workout w = new Workout(name, selectedExercises);
         new WorkoutsService().saveWorkout(w, this::finish);
+    }
+
+    boolean validateFieldsForWorkoutSave() {
+        return assertViewValueNotEmpty(txtWorkoutName);
+    }
+
+    boolean assertViewValueNotEmpty(EditText view) {
+        if (view.getText().toString().equals("")) {
+            view.setError("Required field");
+            view.requestFocus();
+            return  false;
+        }
+        return true;
     }
 
     @Override

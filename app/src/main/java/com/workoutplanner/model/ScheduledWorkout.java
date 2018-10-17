@@ -1,8 +1,9 @@
 package com.workoutplanner.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ScheduledWorkout {
+public class ScheduledWorkout implements Serializable {
     public Workout workout;
     public Date time;
 
