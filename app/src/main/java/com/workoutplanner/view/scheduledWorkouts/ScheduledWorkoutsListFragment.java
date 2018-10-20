@@ -47,19 +47,36 @@ public class ScheduledWorkoutsListFragment extends Fragment {
         // Set the adapter
         Context context = view.getContext();
         view.setLayoutManager(new LinearLayoutManager(context));
-        view.setAdapter(new ScheduledWorkoutsViewAdapter(
+        final ScheduledWorkoutsViewAdapter scheduledWorkoutsViewAdapter = new ScheduledWorkoutsViewAdapter(
                 new ArrayList<ScheduledWorkout>(),
                 mListener
-        ));
+        );
+        view.setAdapter(scheduledWorkoutsViewAdapter);
         loadData();
         return view;
     }
 
     private void loadData() {
-        new ScheduledWorkoutsService().getSheduledWorkouts(scheduledWorkouts -> view.setAdapter(new ScheduledWorkoutsViewAdapter(
-                scheduledWorkouts,
-                mListener
-        )));
+        new ScheduledWorkoutsService().getUnfinishedScheduledWorkouts(scheduledWorkouts -> {
+            view.setAdapter(new ScheduledWorkoutsViewAdapter(
+                    scheduledWorkouts,
+                    new OnListFragmentInteractionListener() {
+                        @Override
+                        public void onListFragmentInteraction(ScheduledWorkout item) {
+                            mListener.onListFragmentInteraction(item);
+                        }
+
+                        @Override
+                        public void onButtonClick(ScheduledWorkout item) {
+                            new ScheduledWorkoutsService().finishWorkout(
+                                    item,
+                                    () -> loadData()
+                            );
+                            mListener.onButtonClick(item);
+                        }
+                    }
+            ));
+        });
     }
 
 

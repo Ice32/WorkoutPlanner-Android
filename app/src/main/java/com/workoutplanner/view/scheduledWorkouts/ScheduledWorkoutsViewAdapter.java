@@ -15,11 +15,7 @@ import com.workoutplanner.model.ScheduledWorkout;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link } and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
+
 public class ScheduledWorkoutsViewAdapter extends RecyclerView.Adapter<ScheduledWorkoutsViewAdapter.ViewHolder> {
 
     private final List<ScheduledWorkout> mValues;

@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface WorkoutsAPI {
     @GET("/workouts")
@@ -23,6 +24,12 @@ public interface WorkoutsAPI {
     @POST("/scheduled_workouts")
     Call<Void> scheduleWorkout(@Body ScheduledWorkout scheduledWorkout);
 
+    @POST("/scheduled_workouts/{id}/finish")
+    Call<Void> finishWorkout(@Path("id") Long id);
+
     @GET("/scheduled_workouts/done")
     Call<List<ScheduledWorkout>> getDoneScheduledWorkouts();
+
+    @GET("/scheduled_workouts/unfinished")
+    Call<List<ScheduledWorkout>> getUnfinishedScheduledWorkouts();
 }

@@ -24,15 +24,13 @@ public class ScheduledWorkoutsService {
         context = MyApplication.getAppContext();
         workoutsAPI = new ServiceGenerator(new JwtTokenProvider(context)).createService(WorkoutsAPI.class);
     }
-
-    public void getSheduledWorkouts(ValueConsumer<List<ScheduledWorkout>> callback) {
-        Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getScheduledWorkouts();
-        workoutsRequest.enqueue(new Callback<List<ScheduledWorkout>>() {
+    private Callback<List<ScheduledWorkout>> getScheduledWorkoutsRetrievalCallback(ValueConsumer<List<ScheduledWorkout>> consumer) {
+        return new Callback<List<ScheduledWorkout>>() {
             @Override
             public void onResponse(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Response<List<ScheduledWorkout>> response) {
                 if(response.isSuccessful()) {
                     List<ScheduledWorkout> workouts = response.body();
-                    callback.consume(workouts);
+                    consumer.consume(workouts);
                 } else {
                     Log.e(LOG_TAG, String.valueOf(response.errorBody()));
                 }
@@ -42,31 +40,40 @@ public class ScheduledWorkoutsService {
             public void onFailure(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
             }
-        });
+        };
     }
 
     public void getDoneScheduledWorkouts(ValueConsumer<List<ScheduledWorkout>> consumer) {
         Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getDoneScheduledWorkouts();
-        workoutsRequest.enqueue(new Callback<List<ScheduledWorkout>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Response<List<ScheduledWorkout>> response) {
-                if(response.isSuccessful()) {
-                    List<ScheduledWorkout> workouts = response.body();
-                    consumer.consume(workouts);
-                } else {
-                    System.out.println(response.errorBody());
-                }
-            }
+        workoutsRequest.enqueue(getScheduledWorkoutsRetrievalCallback(consumer));
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<List<ScheduledWorkout>> call, @NonNull Throwable t) {
-                Log.e(LOG_TAG, t.getMessage());
-            }
-        });
+    public void getUnfinishedScheduledWorkouts(ValueConsumer<List<ScheduledWorkout>> consumer) {
+        Call<List<ScheduledWorkout>> workoutsRequest = workoutsAPI.getUnfinishedScheduledWorkouts();
+        workoutsRequest.enqueue(getScheduledWorkoutsRetrievalCallback(consumer));
     }
 
     public void scheduleWorkout(ScheduledWorkout scheduledWorkout, Runnable callback) {
         Call<Void> workoutsRequest = workoutsAPI.scheduleWorkout(scheduledWorkout);
+
+        workoutsRequest.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                if(response.isSuccessful()) {
+                    callback.run();
+                } else {
+                    Log.e(LOG_TAG, String.valueOf(response.errorBody()));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.e(LOG_TAG, t.getMessage());
+            }
+        });
+    }
+    public void finishWorkout(ScheduledWorkout scheduledWorkout, Runnable callback) {
+        Call<Void> workoutsRequest = workoutsAPI.finishWorkout(scheduledWorkout.id);
 
         workoutsRequest.enqueue(new Callback<Void>() {
             @Override

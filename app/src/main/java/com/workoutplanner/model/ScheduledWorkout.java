@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ScheduledWorkout implements Serializable {
+    public Long id;
     public Workout workout;
     public Date time;
 
