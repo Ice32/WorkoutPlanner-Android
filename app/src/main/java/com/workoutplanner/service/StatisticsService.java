@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.workoutplanner.MyApplication;
 import com.workoutplanner.api.interfaces.StatisticsAPI;
+import com.workoutplanner.model.WeekStatistics;
 import com.workoutplanner.util.ValueConsumer;
 
 import java.util.Map;
@@ -24,13 +25,13 @@ public class StatisticsService {
         statisticsAPI = new ServiceGenerator(new JwtTokenProvider(context)).createService(StatisticsAPI.class);
     }
 
-    public void getStatistics(ValueConsumer<Map<Long, Integer>> consumer) {
-        Call<Map<Long, Integer>> workoutsRequest = statisticsAPI.getStatistics();
-        workoutsRequest.enqueue(new Callback<Map<Long, Integer>>() {
+    public void getStatistics(ValueConsumer<Map<Long, WeekStatistics>> consumer) {
+        Call<Map<Long, WeekStatistics>> workoutsRequest = statisticsAPI.getStatistics();
+        workoutsRequest.enqueue(new Callback<Map<Long, WeekStatistics>>() {
             @Override
-            public void onResponse(@NonNull Call<Map<Long, Integer>> call, @NonNull Response<Map<Long, Integer>> response) {
+            public void onResponse(@NonNull Call<Map<Long, WeekStatistics>> call, @NonNull Response<Map<Long, WeekStatistics>> response) {
                 if(response.isSuccessful()) {
-                    Map<Long, Integer> workouts = response.body();
+                    Map<Long, WeekStatistics> workouts = response.body();
                     consumer.consume(workouts);
                 } else {
                     Log.e(LOG_TAG, String.valueOf(response.errorBody()));
@@ -38,7 +39,7 @@ public class StatisticsService {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Map<Long, Integer>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Map<Long, WeekStatistics>> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
             }
         });
