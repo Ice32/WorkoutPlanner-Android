@@ -14,10 +14,12 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.workoutplanner.R;
 import com.workoutplanner.model.ScheduledWorkout;
+import com.workoutplanner.service.StatisticsService;
 import com.workoutplanner.view.common.BaseNavigationActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WorkoutStatisticsActivity extends BaseNavigationActivity implements DoneWorkoutsListFragment.OnListFragmentInteractionListener {
 
@@ -40,13 +42,30 @@ public class WorkoutStatisticsActivity extends BaseNavigationActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
+        this.loadData();
+        Button btnOpenDoneWorkouts = findViewById(R.id.btnViewDoneWorkouts);
+        btnOpenDoneWorkouts.setOnClickListener(view ->
+                startActivity(new Intent(getApplicationContext(), WorkoutHistoryActivity.class)));
+    }
+
+    private void loadData() {
+        new StatisticsService().getStatistics(this::drawStatisticsGraph);
+    }
+
+    @Override
+    public void onListFragmentInteraction(ScheduledWorkout item) {
+
+    }
+
+    private void drawStatisticsGraph(Map<Long, Integer> statistics) {
         LineChart chart = findViewById(R.id.lineChart);
 
         List<Entry> numWorkoutsEntries = new ArrayList<Entry>();
-        numWorkoutsEntries.add(new Entry(1, 5));
-        numWorkoutsEntries.add(new Entry(2, 8));
-        numWorkoutsEntries.add(new Entry(3, 6));
-        numWorkoutsEntries.add(new Entry(4, 3));
+        for(Map.Entry<Long, Integer> entry : statistics.entrySet()) {
+            Long key = entry.getKey();
+            Integer value = entry.getValue();
+            numWorkoutsEntries.add(new Entry(key, value));
+        }
 
         LineDataSet workoutsDataSet = new LineDataSet(numWorkoutsEntries, "Number of workouts");
         workoutsDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
@@ -57,16 +76,5 @@ public class WorkoutStatisticsActivity extends BaseNavigationActivity implements
         chart.getAxisLeft().setDrawGridLines(false);
         chart.getXAxis().setDrawGridLines(false);
         chart.invalidate();
-
-        Button btnOpenDoneWorkouts = findViewById(R.id.btnViewDoneWorkouts);
-        btnOpenDoneWorkouts.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), WorkoutHistoryActivity.class);
-            startActivity(intent);
-        });
-    }
-
-    @Override
-    public void onListFragmentInteraction(ScheduledWorkout item) {
-
     }
 }
