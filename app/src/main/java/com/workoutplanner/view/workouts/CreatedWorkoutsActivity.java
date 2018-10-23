@@ -47,6 +47,7 @@ public class CreatedWorkoutsActivity extends BaseNavigationActivity implements
     @Override
     public void onListFragmentInteraction(Workout item) {
         Intent intent = new Intent(getApplicationContext(), EditWorkoutActivity.class);
+        intent.putExtra("selected_workout", item);
         startActivity(intent);
     }
 }

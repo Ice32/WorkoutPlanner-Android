@@ -17,6 +17,7 @@ import com.workoutplanner.model.Workout;
 public class EditWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
 
     EditText txtWorkoutName;
+    Workout workout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,11 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
         showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            workout = (Workout) extras.getSerializable("selected_workout");
+            txtWorkoutName.setText(workout.name);
+        }
     }
 
     private void showActionBar() {
@@ -38,10 +44,25 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     }
 
     private void saveWorkout() {
-        String name = txtWorkoutName.getText().toString();
+        if (!validateFieldsForWorkoutSave()) {
+            return;
+        }
 
-        Workout w = new Workout(name);
-        new WorkoutsService().saveWorkout(w, this::finish);
+        workout.name = txtWorkoutName.getText().toString();;
+        new WorkoutsService().saveWorkout(workout, this::finish);
+    }
+
+    boolean validateFieldsForWorkoutSave() {
+        return assertViewValueNotEmpty(txtWorkoutName);
+    }
+
+    boolean assertViewValueNotEmpty(EditText view) {
+        if (view.getText().toString().equals("")) {
+            view.setError("Required field");
+            view.requestFocus();
+            return  false;
+        }
+        return true;
     }
 
     @Override

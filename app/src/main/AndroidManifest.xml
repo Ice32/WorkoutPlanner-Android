@@ -41,7 +41,8 @@
             android:label="Create new exercise" />
         <activity
             android:name=".view.workouts.EditWorkoutActivity"
-            android:label="Update workout" />
+            android:label="Update workout"
+            android:parentActivityName="com.workoutplanner.view.workouts.CreatedWorkoutsActivity"/>
         <activity
             android:name=".view.loginRegistration.RegistrationActivity"
             android:label="Sign up" />
