@@ -22,4 +22,10 @@ public class Exercise implements Serializable {
         this.sets = sets;
         this.reps = reps;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Exercise e = (Exercise)obj;
+        return e.id == this.id;
+    }
 }

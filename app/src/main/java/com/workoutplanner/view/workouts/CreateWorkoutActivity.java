@@ -12,12 +12,12 @@ import com.workoutplanner.R;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.WorkoutsService;
-import com.workoutplanner.view.exercises.SelectableExerciseFragment;
+import com.workoutplanner.view.exercises.SelectableExercisesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
+public class CreateWorkoutActivity extends AppCompatActivity implements SelectableExercisesFragment.OnListFragmentInteractionListener {
     private List<Exercise> selectedExercises = new ArrayList<>();
 
     EditText txtWorkoutName;

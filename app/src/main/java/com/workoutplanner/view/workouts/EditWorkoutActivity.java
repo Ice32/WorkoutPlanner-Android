@@ -10,14 +10,18 @@ import android.widget.EditText;
 
 import com.workoutplanner.R;
 import com.workoutplanner.service.WorkoutsService;
-import com.workoutplanner.view.exercises.SelectableExerciseFragment;
+import com.workoutplanner.util.FragmentUtils;
+import com.workoutplanner.view.exercises.SelectableExercisesFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
 
-public class EditWorkoutActivity extends AppCompatActivity implements SelectableExerciseFragment.OnListFragmentInteractionListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    EditText txtWorkoutName;
-    Workout workout;
+public class EditWorkoutActivity extends AppCompatActivity implements SelectableExercisesFragment.OnListFragmentInteractionListener {
+    private List<Exercise> selectedExercises = new ArrayList<>();
+    private EditText txtWorkoutName;
+    private Workout workout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +29,18 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
         setContentView(R.layout.workouts_edit_workout_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         txtWorkoutName = findViewById(R.id.txtWorkoutName);
-        showActionBar();
         final TextInputLayout workoutNameWrapper = findViewById(R.id.workoutNameWrapper);
         workoutNameWrapper.setHint("Name");
+        showActionBar();
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             workout = (Workout) extras.getSerializable("selected_workout");
             txtWorkoutName.setText(workout.name);
         }
+        FragmentUtils.openAsReplace(this, R.id.editWorkoutActivityFragmentPlaceholder, SelectableExercisesFragment.newInstance(workout));
+        loadSelectedExercises();
     }
 
     private void showActionBar() {
@@ -49,6 +55,7 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
         }
 
         workout.name = txtWorkoutName.getText().toString();;
+        workout.exercises = selectedExercises;
         new WorkoutsService().saveWorkout(workout, this::finish);
     }
 
@@ -65,6 +72,9 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
         return true;
     }
 
+    private void loadSelectedExercises() {
+        selectedExercises.addAll(workout.exercises);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -89,7 +99,11 @@ public class EditWorkoutActivity extends AppCompatActivity implements Selectable
     }
 
     @Override
-    public void onListFragmentInteraction(Exercise item, boolean isSelected) {
-
+    public void onListFragmentInteraction(Exercise item, boolean isChecked) {
+        if (isChecked) {
+            selectedExercises.add(item);
+        } else {
+            selectedExercises.remove(item);
+        }
     }
 }

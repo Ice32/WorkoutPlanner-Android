@@ -9,7 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.workoutplanner.R;
-import com.workoutplanner.view.exercises.SelectableExerciseFragment.OnListFragmentInteractionListener;
+import com.workoutplanner.view.exercises.SelectableExercisesFragment.OnListFragmentInteractionListener;
 import com.workoutplanner.model.Exercise;
 
 import java.util.List;
@@ -18,11 +18,13 @@ import java.util.List;
 public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<SelectableExerciseViewAdapter.ViewHolder> {
 
     private final List<Exercise> mValues;
+    private final List<Exercise> selectedExercises;
     private final OnListFragmentInteractionListener mListener;
 
-    public SelectableExerciseViewAdapter(List<Exercise> items, OnListFragmentInteractionListener listener) {
+    public SelectableExerciseViewAdapter(List<Exercise> items, OnListFragmentInteractionListener listener, List<Exercise> selectedExercises) {
         mValues = items;
         mListener = listener;
+        this.selectedExercises = selectedExercises;
     }
 
     @Override
@@ -39,6 +41,12 @@ public class SelectableExerciseViewAdapter extends RecyclerView.Adapter<Selectab
         holder.selectableExerciseHeader.setText(exercise.name);
         String setsReps = exercise.sets + " sets, " + exercise.reps + " reps";
         holder.selectableExerciseSubHeader.setText(setsReps);
+
+        for (Exercise selectedExercise: selectedExercises) {
+            if (selectedExercise.id == exercise.id) {
+                holder.checkBox.setChecked(true);
+            }
+        }
 
         holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> mListener.onListFragmentInteraction(holder.mItem, isChecked));
     }

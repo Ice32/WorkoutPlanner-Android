@@ -12,35 +12,40 @@ import android.view.ViewGroup;
 
 import com.workoutplanner.R;
 import com.workoutplanner.model.Exercise;
+import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.ExercisesService;
 
 import java.util.ArrayList;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
-public class SelectableExerciseFragment extends Fragment {
+public class SelectableExercisesFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
     private RecyclerView view;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public SelectableExerciseFragment() {
+    private static final String workout_key = "workout_key";
+    private Workout workout;
+
+    public SelectableExercisesFragment() {
     }
 
     @SuppressWarnings("unused")
-    public static SelectableExerciseFragment newInstance() {
-        return new SelectableExerciseFragment();
+    public static SelectableExercisesFragment newInstance(Workout workout) {
+        final SelectableExercisesFragment f = new SelectableExercisesFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(workout_key, workout);
+        f.setArguments(args);
+
+        return f;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            workout = (Workout) args.getSerializable(workout_key);
+        }
     }
 
     @Override
@@ -50,15 +55,16 @@ public class SelectableExerciseFragment extends Fragment {
 
         // Set the adapter
         view.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        view.setAdapter(new SelectableExerciseViewAdapter(new ArrayList<Exercise>(), mListener));
-        loadData();
+        loadAllExercises();
+        view.setAdapter(new SelectableExerciseViewAdapter(new ArrayList<Exercise>(), mListener, new ArrayList<>()));
         return view;
     }
 
-    private void loadData() {
+    private void loadAllExercises() {
         new ExercisesService().findExercises(exercises -> view.setAdapter(new SelectableExerciseViewAdapter(
                 exercises,
-                mListener
+                mListener,
+                workout != null ? workout.exercises : new ArrayList<>()
         )));
     }
 

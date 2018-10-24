@@ -33,10 +33,10 @@
         android:layout_below="@+id/workoutNameWrapper"
         android:fontFamily="@font/roboto_regular"
         android:textSize="17sp"/>
-    <fragment
-        android:id="@+id/selectableExerciseList"
-        android:name="com.workoutplanner.view.exercises.SelectableExerciseFragment"
+    <!--suppress CheckTagEmptyBody -->
+    <RelativeLayout
+        android:id="@+id/editWorkoutActivityFragmentPlaceholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/exercisesSubHeader" />
+        android:layout_below="@+id/exercisesSubHeader"></RelativeLayout>
 </RelativeLayout>

@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".view.exercises.SelectableExerciseFragment"
+    tools:context=".view.exercises.SelectableExercisesFragment"
     tools:listitem="@layout/exercises_selectable_exercise_item" />

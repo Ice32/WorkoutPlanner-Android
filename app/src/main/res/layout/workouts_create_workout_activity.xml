@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/selectableExerciseList"
-        android:name="com.workoutplanner.view.exercises.SelectableExerciseFragment"
+        android:name="com.workoutplanner.view.exercises.SelectableExercisesFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/exercisesSubHeader"/>
