@@ -36,4 +36,9 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="jwt_token">JwtToken</string>
     <string name="refresh_token">refresh_token</string>
+    <string name="scheduled_workouts_empty_list_text">No workouts scheduled</string>
+    <string name="created_workouts_empty_list_text">No workouts created yet</string>
+    <string name="created_exercises_empty_list_text">No exercises created yet</string>
+    <string name="done_workouts_empty_list_text">No workouts completed yet</string>
+    <string name="selectable_exercises_empty_list_text">No exercises created yet</string>
 </resources>

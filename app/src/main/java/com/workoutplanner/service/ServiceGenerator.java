@@ -11,10 +11,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.workoutplanner.api.ApiConstants.API_BASE_URL;
 
-public class ServiceGenerator {
+class ServiceGenerator {
     private final JwtTokenProvider tokenProvider;
 
-    public ServiceGenerator(JwtTokenProvider tokenProvider) {
+    ServiceGenerator(JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
@@ -28,7 +28,7 @@ public class ServiceGenerator {
 
     private static Retrofit retrofit = builder.build();
 
-    public <S> S createService(Class<S> serviceClass) {
+    <S> S createService(Class<S> serviceClass) {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         final String authToken = tokenProvider.get();
         if (!TextUtils.isEmpty(authToken)) {

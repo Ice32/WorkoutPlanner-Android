@@ -84,8 +84,10 @@ public class WorkoutStatisticsActivity extends BaseNavigationActivity implements
         LineDataSet workoutsDataSet = new LineDataSet(numWorkoutsEntries, "Number of workouts");
         workoutsDataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
-        LineData lineData = new LineData(workoutsDataSet);
-        chart.setData(lineData);
+        if (!numWorkoutsEntries.isEmpty()) {
+            LineData lineData = new LineData(workoutsDataSet);
+            chart.setData(lineData);
+        }
         chart.getAxisRight().setDrawGridLines(false);
         chart.getAxisLeft().setDrawGridLines(false);
         chart.getXAxis().setDrawGridLines(false);

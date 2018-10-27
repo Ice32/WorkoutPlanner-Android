@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/selectableExerciseList"
-    android:name="com.workoutplanner.existingExercises.SelectableExerciseFragment"
+<android.support.constraint.ConstraintLayout android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".view.exercises.SelectableExercisesFragment"
-    tools:listitem="@layout/exercises_selectable_exercise_item" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/selectableExercisesRecyclerView"
+        android:name="com.workoutplanner.existingExercises.SelectableExerciseFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".view.exercises.SelectableExercisesFragment"
+        tools:listitem="@layout/exercises_selectable_exercise_item" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/selectableExercisesEmptyView"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/selectableExercisesRecyclerView"
+        android:layout_marginTop="10dp"
+        android:text="@string/selectable_exercises_empty_list_text"/>
+</android.support.constraint.ConstraintLayout>

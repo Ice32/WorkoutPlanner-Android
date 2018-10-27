@@ -3,12 +3,14 @@ package com.workoutplanner.view.exercises;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.workoutplanner.R;
 import com.workoutplanner.model.Exercise;
@@ -25,7 +27,9 @@ import java.util.ArrayList;
  */
 public class ExistingExerciseListFragment extends Fragment {
     private OnListFragmentInteractionListener mListener;
-    private RecyclerView view;
+    private ConstraintLayout view;
+    private RecyclerView recyclerView;
+    private TextView createdExercisesEmptyView;
 
     public ExistingExerciseListFragment() {
     }
@@ -33,11 +37,6 @@ public class ExistingExerciseListFragment extends Fragment {
     @SuppressWarnings("unused")
     public static ExistingExerciseListFragment newInstance() {
         return new ExistingExerciseListFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -49,10 +48,12 @@ public class ExistingExerciseListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = (RecyclerView) inflater.inflate(R.layout.exercises_list, container, false);
+        view = (ConstraintLayout) inflater.inflate(R.layout.exercises_list, container, false);
+        recyclerView = view.findViewById(R.id.createdExercisesRecyclerView);
+        createdExercisesEmptyView = view.findViewById(R.id.createdExercisesEmptyView);
         // Set the adapter
-        view.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        view.setAdapter(new ExistingExerciseViewAdapter(
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(new ExistingExerciseViewAdapter(
                 new ArrayList<Exercise>(),
                 mListener
         ));
@@ -61,10 +62,20 @@ public class ExistingExerciseListFragment extends Fragment {
     }
 
     private void loadExercises() {
-        new ExercisesService().findExercises(exercises -> view.setAdapter(new ExistingExerciseViewAdapter(
-                exercises,
-                mListener
-        )));
+        new ExercisesService().findExercises(exercises -> {
+            recyclerView.setAdapter(new ExistingExerciseViewAdapter(
+                    exercises,
+                    mListener
+            ));
+            if (exercises.isEmpty()) {
+                recyclerView.setVisibility(View.GONE);
+                createdExercisesEmptyView.setVisibility(View.VISIBLE);
+            }
+            else {
+                recyclerView.setVisibility(View.VISIBLE);
+                createdExercisesEmptyView.setVisibility(View.GONE);
+            }
+        });
     }
 
 
