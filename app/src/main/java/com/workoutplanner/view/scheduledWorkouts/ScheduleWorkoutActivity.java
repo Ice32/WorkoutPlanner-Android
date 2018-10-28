@@ -4,12 +4,14 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
     Workout selectedWorkout;
     Calendar selectedDate = Calendar.getInstance();
     TextView selectedWorkoutToSchedule;
+    Button btnScheduleWorkoutSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
 
         txtExactDate = findViewById(R.id.txtExactDate);
         txtExactTime = findViewById(R.id.txtExactTime);
+        btnScheduleWorkoutSave = findViewById(R.id.btnScheduleWorkoutSave);
 
         txtExactDate.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog =
@@ -55,6 +59,7 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
                             selectedDate.get(Calendar.YEAR),
                             selectedDate.get(Calendar.MONTH),
                             selectedDate.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
             datePickerDialog.show();
         });
         txtExactTime.setOnClickListener(v -> {
@@ -101,6 +106,10 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
                 selectedWorkout,
                 selectedDate.getTime()
         );
+        if (selectedDate.before(Calendar.getInstance())) {
+            Snackbar.make(findViewById(R.id.scheduled_workouts_constraint_layout), "Please select a future date", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
         new ScheduledWorkoutsService().scheduleWorkout(scheduledWorkout, () -> startActivity(new Intent(getApplicationContext(), HomeActivity.class)));
     }
 

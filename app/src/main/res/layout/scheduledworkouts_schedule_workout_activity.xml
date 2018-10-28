@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".view.scheduledWorkouts.ScheduleWorkoutActivity"
     android:paddingLeft="@dimen/top_level_side_padding"
-    android:paddingRight="@dimen/top_level_side_padding">
+    android:paddingRight="@dimen/top_level_side_padding"
+    android:id="@+id/scheduled_workouts_constraint_layout">
 
     <LinearLayout
         android:id="@+id/scheduleWorkoutHeader"
