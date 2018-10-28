@@ -50,7 +50,20 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
         txtExactDate = findViewById(R.id.txtExactDate);
         txtExactTime = findViewById(R.id.txtExactTime);
         btnScheduleWorkoutSave = findViewById(R.id.btnScheduleWorkoutSave);
+        selectedWorkoutToSchedule = findViewById(R.id.selectedWorkoutToSchedule);
 
+        initDateTimePickers();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            selectedWorkout = (Workout) extras.getSerializable("selected_workout");
+            selectedWorkoutToSchedule.setText(selectedWorkout.name);
+        }
+        spinnerWorkoutDay.setAdapter(adapter);
+    }
+
+    private void initDateTimePickers() {
+        updateDateFieldValue();
         txtExactDate.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog =
                     new DatePickerDialog(
@@ -62,20 +75,26 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
             datePickerDialog.show();
         });
+
+        updateTimeFieldValue();
         txtExactTime.setOnClickListener(v -> {
             int hour = selectedDate.get(Calendar.HOUR_OF_DAY);
             int minute = selectedDate.get(Calendar.MINUTE);
             new TimePickerDialog(this, this, hour, minute,
                     DateFormat.is24HourFormat(this)).show();
         });
-        selectedWorkoutToSchedule = findViewById(R.id.selectedWorkoutToSchedule);
+    }
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            selectedWorkout = (Workout) extras.getSerializable("selected_workout");
-            selectedWorkoutToSchedule.setText(selectedWorkout.name);
-        }
-        spinnerWorkoutDay.setAdapter(adapter);
+    private void updateDateFieldValue() {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMM, yyy", getResources().getConfiguration().locale);
+        String dateText = dateFormat.format(selectedDate.getTime());
+        txtExactDate.setText(dateText);
+    }
+
+    private void updateTimeFieldValue() {
+        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", getResources().getConfiguration().locale);
+        String timeText = timeFormat.format(selectedDate.getTime());
+        txtExactTime.setText(timeText);
     }
 
     @Override
@@ -116,19 +135,14 @@ public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePi
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         selectedDate.set(year, month, dayOfMonth);
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd MMM, yyy", getResources().getConfiguration().locale);
-        String dateText = dateFormat.format(selectedDate.getTime());
-        txtExactDate.setText(dateText);
+        updateDateFieldValue();
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        selectedDate.set(Calendar.HOUR, hourOfDay);
+        selectedDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
         selectedDate.set(Calendar.MINUTE, minute);
-
-        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", getResources().getConfiguration().locale);
-        String timeText = timeFormat.format(selectedDate.getTime());
-        txtExactTime.setText(timeText);
+        updateTimeFieldValue();
     }
 
 
