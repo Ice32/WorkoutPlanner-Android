@@ -1,10 +1,12 @@
 package com.workoutplanner.view.scheduledWorkouts;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,11 +66,7 @@ public class ScheduledWorkoutsListFragment extends Fragment {
 
                         @Override
                         public void onButtonClick(ScheduledWorkout item) {
-                            new ScheduledWorkoutsService().finishWorkout(
-                                    item,
-                                    () -> loadData()
-                            );
-                            mListener.onButtonClick(item);
+                            onWorkoutFinishClick(item);
                         }
                     }
             ));
@@ -83,6 +81,27 @@ public class ScheduledWorkoutsListFragment extends Fragment {
         });
     }
 
+    void onWorkoutFinishClick(ScheduledWorkout workout) {
+        showConfirmationDialog(
+                (dialog, which) -> {
+                    new ScheduledWorkoutsService().finishWorkout(
+                            workout,
+                            this::loadData
+                    );
+                    mListener.onButtonClick(workout);
+                },
+                null
+        );
+    }
+
+    void showConfirmationDialog(DialogInterface.OnClickListener onConfirm, DialogInterface.OnClickListener onReject) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.finish_workout_prompt)
+                .setMessage(R.string.finish_workout_question)
+                .setPositiveButton(android.R.string.yes, onConfirm)
+                .setNegativeButton(android.R.string.no, onReject)
+                .show();
+    }
 
     @Override
     public void onAttach(Context context) {

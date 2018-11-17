@@ -41,4 +41,6 @@
     <string name="created_exercises_empty_list_text">No exercises created yet</string>
     <string name="done_workouts_empty_list_text">No workouts completed yet</string>
     <string name="selectable_exercises_empty_list_text">No exercises created yet</string>
+    <string name="finish_workout_prompt">Finish workout</string>
+    <string name="finish_workout_question">Are you sure you want to mark this workout as finished?</string>
 </resources>
