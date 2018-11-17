@@ -3,7 +3,6 @@ package com.workoutplanner.view.loginRegistration;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,7 +23,7 @@ import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseLoginRegistrationActivity {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -66,7 +65,14 @@ public class LoginActivity extends Activity {
         if (jwtToken != null) {
             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(intent);
+            broadcastLogin();
         }
+    }
+
+    private void broadcastLogin() {
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction(loginAction);
+        sendBroadcast(broadcastIntent);
     }
 
 
@@ -196,6 +202,7 @@ public class LoginActivity extends Activity {
             if (success) {
                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(intent);
+                broadcastLogin();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

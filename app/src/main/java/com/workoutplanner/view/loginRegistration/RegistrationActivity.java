@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -16,12 +15,10 @@ import android.widget.EditText;
 import com.workoutplanner.R;
 import com.workoutplanner.model.User;
 import com.workoutplanner.service.AuthenticationService;
-import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseLoginRegistrationActivity {
     private RegistrationActivity.UserRegistrationTask mAuthTask = null;
 
-    // UI references.
     private EditText mFullNameView;
     private EditText mEmailView;
     private EditText mPasswordView;
@@ -167,7 +164,7 @@ public class RegistrationActivity extends AppCompatActivity {
             showProgress(false);
 
             if (error == null) {
-                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             } else {
                 mEmailView.setError(error);
