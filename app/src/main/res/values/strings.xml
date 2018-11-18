@@ -9,10 +9,12 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <!-- End Strings related to login -->
+
+    <string name="error_field_required">This field is required</string>
     <string name="title_activity_home">Workouts</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -43,4 +45,6 @@
     <string name="selectable_exercises_empty_list_text">No exercises created yet</string>
     <string name="finish_workout_prompt">Finish workout</string>
     <string name="finish_workout_question">Are you sure you want to mark this workout as finished?</string>
+    <string name="error_api_not_available">Network service not available</string>
+    <string name="error_unknown_error">Unknown error occurred</string>
 </resources>

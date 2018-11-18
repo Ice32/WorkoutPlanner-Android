@@ -3,22 +3,22 @@ package com.workoutplanner.view.workouts;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.workoutplanner.R;
-import com.workoutplanner.service.WorkoutsService;
-import com.workoutplanner.util.FragmentUtils;
-import com.workoutplanner.view.exercises.SelectableExercisesFragment;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.model.Workout;
+import com.workoutplanner.service.WorkoutsService;
+import com.workoutplanner.util.FragmentUtils;
+import com.workoutplanner.view.common.BaseActivity;
+import com.workoutplanner.view.exercises.SelectableExercisesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditWorkoutActivity extends AppCompatActivity implements SelectableExercisesFragment.OnListFragmentInteractionListener {
+public class EditWorkoutActivity extends BaseActivity implements SelectableExercisesFragment.OnListFragmentInteractionListener {
     private List<Exercise> selectedExercises = new ArrayList<>();
     private EditText txtWorkoutName;
     private Workout workout;

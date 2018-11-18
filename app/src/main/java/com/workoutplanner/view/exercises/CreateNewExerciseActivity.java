@@ -9,9 +9,10 @@ import android.widget.EditText;
 import com.workoutplanner.R;
 import com.workoutplanner.model.Exercise;
 import com.workoutplanner.service.ExercisesService;
+import com.workoutplanner.view.common.BaseActivity;
 
 
-public class CreateNewExerciseActivity extends AppCompatActivity{
+public class CreateNewExerciseActivity extends BaseActivity {
     private EditText txtExerciseName;
     private EditText txtNumSets;
     private EditText txtNumReps;

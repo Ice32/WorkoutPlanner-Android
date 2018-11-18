@@ -21,7 +21,7 @@ import com.workoutplanner.view.scheduledWorkouts.HomeActivity;
 import com.workoutplanner.view.statistics.WorkoutStatisticsActivity;
 import com.workoutplanner.view.workouts.CreatedWorkoutsActivity;
 
-public abstract class BaseNavigationActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class BaseNavigationActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private BroadcastReceiver broadcastReceiver;
     private boolean receiverRegistered;
     private final String logoutAction = "com.package.ACTION_LOGOUT";

@@ -42,6 +42,10 @@ class ServiceGenerator {
             }
         }
 
+        httpClient.addInterceptor(new ErrorInterceptor());
+        builder.client(httpClient.build());
+        retrofit = builder.build();
+
         return retrofit.create(serviceClass);
     }
 }

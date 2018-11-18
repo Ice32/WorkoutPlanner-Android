@@ -7,9 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
-public abstract class BaseLoginRegistrationActivity extends AppCompatActivity {
+import com.workoutplanner.view.common.BaseActivity;
+
+public abstract class BaseLoginRegistrationActivity extends BaseActivity {
     private BroadcastReceiver broadcastReceiver;
     private boolean receiverRegistered = false;
     protected final String loginAction = "com.package.ACTION_LOGIN";

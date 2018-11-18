@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +20,14 @@ import com.workoutplanner.R;
 import com.workoutplanner.model.ScheduledWorkout;
 import com.workoutplanner.model.Workout;
 import com.workoutplanner.service.ScheduledWorkoutsService;
+import com.workoutplanner.view.common.BaseActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-public class ScheduleWorkoutActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class ScheduleWorkoutActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     TextView txtExactDate;
     TextView txtExactTime;
     Workout selectedWorkout;
