@@ -45,9 +45,6 @@ public class LoginActivity extends BaseLoginRegistrationActivity {
         mEmailView = findViewById(R.id.email);
         mPasswordView = findViewById(R.id.password);
 
-        mEmailView.setText("Kenan@mail.com");
-        mPasswordView.setText("password");
-
         TextView createAccountText = findViewById(R.id.noAccountPartTwo);
 
         Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
