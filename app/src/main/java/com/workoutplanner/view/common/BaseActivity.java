@@ -12,6 +12,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.workoutplanner.R;
 import com.workoutplanner.service.ErrorInterceptor;
@@ -69,5 +70,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         Snackbar snackbar = Snackbar.make(view, stringId, Snackbar.LENGTH_LONG);
         snackbar.show();
+    }
+
+    protected boolean assertViewValueNotEmpty(EditText view) {
+        if (view.getText().toString().equals("")) {
+            view.setError(getString(R.string.error_field_required));
+            view.requestFocus();
+            return  false;
+        }
+        return true;
     }
 }

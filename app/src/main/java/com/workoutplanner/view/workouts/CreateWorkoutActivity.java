@@ -55,15 +55,6 @@ public class CreateWorkoutActivity extends BaseActivity implements SelectableExe
         return assertViewValueNotEmpty(txtWorkoutName);
     }
 
-    boolean assertViewValueNotEmpty(EditText view) {
-        if (view.getText().toString().equals("")) {
-            view.setError("Required field");
-            view.requestFocus();
-            return  false;
-        }
-        return true;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

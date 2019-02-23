@@ -63,15 +63,6 @@ public class EditWorkoutActivity extends BaseActivity implements SelectableExerc
         return assertViewValueNotEmpty(txtWorkoutName);
     }
 
-    boolean assertViewValueNotEmpty(EditText view) {
-        if (view.getText().toString().equals("")) {
-            view.setError("Required field");
-            view.requestFocus();
-            return  false;
-        }
-        return true;
-    }
-
     private void loadSelectedExercises() {
         selectedExercises.addAll(workout.exercises);
     }

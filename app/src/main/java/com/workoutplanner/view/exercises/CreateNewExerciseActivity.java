@@ -1,7 +1,6 @@
 package com.workoutplanner.view.exercises;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -53,15 +52,6 @@ public class CreateNewExerciseActivity extends BaseActivity {
         return assertViewValueNotEmpty(txtNumSets)
                 && assertViewValueNotEmpty(txtNumReps)
                 && assertViewValueNotEmpty(txtExerciseName);
-    }
-
-    boolean assertViewValueNotEmpty(EditText view) {
-       if (view.getText().toString().equals("")) {
-           view.setError("Required field");
-           view.requestFocus();
-           return  false;
-       }
-       return true;
     }
 
     @Override

@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -89,19 +88,18 @@ public class LoginActivity extends BaseLoginRegistrationActivity {
         boolean cancel = false;
         View focusView = null;
 
+        if (!validateFieldsNotEmpty()) {
+            return;
+        }
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
+        if(!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -128,6 +126,11 @@ public class LoginActivity extends BaseLoginRegistrationActivity {
                 showProgress(false);
             });
         }
+    }
+
+    boolean validateFieldsNotEmpty() {
+        return assertViewValueNotEmpty(mEmailView)
+                && assertViewValueNotEmpty(mPasswordView);
     }
 
     private boolean isEmailValid(String email) {
