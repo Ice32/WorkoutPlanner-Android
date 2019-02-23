@@ -58,7 +58,6 @@ public class ExercisesService {
             @Override
             public void onFailure(@NonNull Call<List<Exercise>> call, @NonNull Throwable t) {
                 Log.e(LOG_TAG, t.getMessage());
-                callback.consume(null);
             }
         });
     }

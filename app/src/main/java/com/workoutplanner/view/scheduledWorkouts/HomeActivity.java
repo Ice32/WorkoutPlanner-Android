@@ -12,8 +12,6 @@ import com.workoutplanner.R;
 import com.workoutplanner.model.ScheduledWorkout;
 import com.workoutplanner.view.common.BaseNavigationActivity;
 
-import java.util.logging.Logger;
-
 public class HomeActivity extends BaseNavigationActivity
         implements ScheduledWorkoutsListFragment.OnListFragmentInteractionListener {
 
@@ -43,14 +41,9 @@ public class HomeActivity extends BaseNavigationActivity
     }
 
     @Override
-    public void onListFragmentInteraction(ScheduledWorkout item) {
-        Logger.getAnonymousLogger().info("Clicked");
-    }
+    public void onListFragmentInteraction(ScheduledWorkout item) {}
 
     @Override
-    public void onButtonClick(ScheduledWorkout item) {
-//        Intent intent = new Intent(getApplicationContext(), SelectWorkoutActivity.class);
-//        startActivity(intent);
-    }
+    public void onButtonClick(ScheduledWorkout item) {}
 
 }

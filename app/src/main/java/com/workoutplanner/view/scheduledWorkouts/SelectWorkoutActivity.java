@@ -12,8 +12,6 @@ import com.workoutplanner.view.common.WorkoutsListFragment;
 public class SelectWorkoutActivity extends BaseNavigationActivity implements
         WorkoutsListFragment.OnListFragmentInteractionListener {
 
-    FloatingActionButton btnCreateWorkout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

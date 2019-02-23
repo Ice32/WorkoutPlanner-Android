@@ -8,6 +8,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.workoutplanner.MyApplication;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -20,11 +22,19 @@ public class ErrorInterceptor implements Interceptor {
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();
-        Response response = chain.proceed(request);
+        Response response;
+        try {
+            response = chain.proceed(request);
 
-        if (response.code() >= 300) {
-            broadcastNetworkError(response.code());
-            return response;
+            final int responseCode = response.code();
+            if (responseCode == 404 || responseCode >= 500) {
+                broadcastNetworkError(responseCode);
+                return response;
+            }
+        }
+        catch (ConnectException | SocketTimeoutException e) {
+            broadcastNetworkError(502);
+            throw e;
         }
 
         return response;

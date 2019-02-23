@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,7 +16,6 @@ import com.workoutplanner.model.User;
 import com.workoutplanner.service.AuthenticationService;
 
 public class RegistrationActivity extends BaseLoginRegistrationActivity {
-    private RegistrationActivity.UserRegistrationTask mAuthTask = null;
 
     private EditText mFullNameView;
     private EditText mEmailView;
@@ -42,9 +40,6 @@ public class RegistrationActivity extends BaseLoginRegistrationActivity {
 
 
     private void attemptRegistration() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -82,8 +77,18 @@ public class RegistrationActivity extends BaseLoginRegistrationActivity {
             // Show a progress spinner, and kick off a background task to
             // perform the user registration attempt.
             showProgress(true);
-            mAuthTask = new RegistrationActivity.UserRegistrationTask(email, fullName, password);
-            mAuthTask.execute((Void) null);
+            User user = new User(email, fullName, password);
+            new AuthenticationService().registerUser(user, error -> {
+                if (error == null) {
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                } else if (!error.equals("Unknown error")) {
+                    mEmailView.setError(error);
+                    mEmailView.requestFocus();
+
+                }
+                showProgress(false);
+            });
 
         }
     }
@@ -131,52 +136,6 @@ public class RegistrationActivity extends BaseLoginRegistrationActivity {
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mRegistrationFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
-
-    /**
-     * Represents an asynchronous registration task used to authenticate
-     * the user.
-     */
-    public class UserRegistrationTask extends AsyncTask<Void, Void, String> {
-
-        private final String mEmail;
-        private final String mPassword;
-        private final String fullName;
-
-        UserRegistrationTask(String email, String fullName, String password) {
-            mEmail = email;
-            mPassword = password;
-            this.fullName = fullName;
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            User user = new User(mEmail, fullName, mPassword);
-
-            return new AuthenticationService().registerUser(user);
-        }
-
-        @Override
-        protected void onPostExecute(final String error) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (error == null) {
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            } else {
-                mEmailView.setError(error);
-                mEmailView.requestFocus();
-
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
         }
     }
 }
