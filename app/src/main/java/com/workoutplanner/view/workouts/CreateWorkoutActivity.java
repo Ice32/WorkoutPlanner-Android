@@ -21,6 +21,7 @@ public class CreateWorkoutActivity extends BaseActivity implements SelectableExe
     private List<Exercise> selectedExercises = new ArrayList<>();
 
     EditText txtWorkoutName;
+    private boolean saveInProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class CreateWorkoutActivity extends BaseActivity implements SelectableExe
 
     private void saveWorkout() {
         if (!validateFieldsForWorkoutSave()) {
+            saveInProgress = false;
             return;
         }
         String name = txtWorkoutName.getText().toString();
@@ -72,7 +74,10 @@ public class CreateWorkoutActivity extends BaseActivity implements SelectableExe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.btnCreateWorkoutSave) {
-            saveWorkout();
+            if (!saveInProgress) {
+                saveInProgress = true;
+                saveWorkout();
+            }
         }
 
         return super.onOptionsItemSelected(item);

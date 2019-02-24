@@ -15,6 +15,7 @@ public class CreateNewExerciseActivity extends BaseActivity {
     private EditText txtExerciseName;
     private EditText txtNumSets;
     private EditText txtNumReps;
+    private boolean saveInProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,10 @@ public class CreateNewExerciseActivity extends BaseActivity {
         int id = item.getItemId();
 
         if (id == R.id.btnAddNewExerciseSave) {
-            saveExercise();
+            if (!saveInProgress) {
+                saveInProgress = true;
+                saveExercise();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -39,6 +43,7 @@ public class CreateNewExerciseActivity extends BaseActivity {
 
     private void saveExercise() {
         if (!validateFieldsForExerciseSave()) {
+            saveInProgress = false;
             return;
         }
         String name = txtExerciseName.getText().toString();
