@@ -34,6 +34,7 @@ public class ScheduleWorkoutActivity extends BaseActivity implements DatePickerD
     Calendar selectedDate = Calendar.getInstance();
     TextView selectedWorkoutToSchedule;
     Button btnScheduleWorkoutSave;
+    private boolean saveInProgress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,10 @@ public class ScheduleWorkoutActivity extends BaseActivity implements DatePickerD
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.btnScheduleWorkoutSave) {
-            scheduleWorkout();
+            if (!saveInProgress) {
+                saveInProgress = true;
+                scheduleWorkout();
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -127,6 +131,7 @@ public class ScheduleWorkoutActivity extends BaseActivity implements DatePickerD
         );
         if (selectedDate.before(Calendar.getInstance())) {
             Snackbar.make(findViewById(R.id.scheduled_workouts_constraint_layout), "Please select a future date", Snackbar.LENGTH_SHORT).show();
+            saveInProgress = false;
             return;
         }
         new ScheduledWorkoutsService().scheduleWorkout(scheduledWorkout, () -> startActivity(new Intent(getApplicationContext(), HomeActivity.class)));
